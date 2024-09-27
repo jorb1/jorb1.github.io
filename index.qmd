@@ -1,4 +1,22 @@
 ---
-title: "jorb1.github.io"
+title: "Bailey Jorgensen"
+image: Bailey Jorgensen_MEDS Headshot 2024_0011.jpeg
+about: 
+  template: broadside
+  image-width: 15em
+  links: 
+    - text: LinkedIn
+      href: www.linkedin.com/in/bailey-jorgensen-a0a467271
+      target: _blank
+    - text: GitHub
+      href: https://github.com/jorb1
+      target: _blank
+    - text: Email
+      href: mailto:bjorgensen@ucsb.edu
 ---
 
+Bailey Jorgensen grew up in Montana and got her B.S. in Archaeology at Montana State University. When not at Bren, she works as the Collections Manager at the Alf Museum of Paleontology in Claremont, California. At the museum, she cares for an active research collection and exhibits hall and coleads cohorts of students in paleontological fieldwork and data collection. Her fieldwork areas include backcountry quarries in Grand Staircase Escalante National Monument, sites in the Mojave Desert, Manti-la-Sal National Forest, Montana’s Gravelly Range, Bighorn Basin in Wyoming, and Bayanzag in Mongolia. 
+
+Before finding the Alf Museum, she worked sailing and preserving historic wooden ships for maritime museums and institutes. She helped run programs such as the Topsail STEM Adventure Program and the Beyond the Bell Oceanography Middle School Program at the Los Angeles Maritime Institute. 
+
+Her experiences in data management have allowed her to participate in active research and data management. She joined the MEDS program at the Bren School to fully maximize these opportunities, and to deepen the technical knowledge required for more advanced projects. She hopes to continue work in the biodiversity heritage sector, especially for marine environments. 
