@@ -1,11 +1,12 @@
 ---
-title: "Bailey Jorgensen"
+title: "Bailey Jørgensen"
 image: Bailey Jorgensen_MEDS Headshot 2024_0011.jpeg
 about: 
   template: broadside
   image-width: 15em
   links: 
     - text: LinkedIn
+      icon: linkedin
       href: www.linkedin.com/in/bailey-jorgensen-a0a467271
       target: _blank
     - text: GitHub
@@ -15,7 +16,7 @@ about:
       href: mailto:bjorgensen@ucsb.edu
 ---
 
-Bailey Jorgensen grew up in Montana and got her B.S. in Archaeology at Montana State University. When not at Bren, she works as the Collections Manager at the Alf Museum of Paleontology in Claremont, California. At the museum, she cares for an active research collection and exhibits hall and coleads cohorts of students in paleontological fieldwork and data collection. Her fieldwork areas include backcountry quarries in Grand Staircase Escalante National Monument, sites in the Mojave Desert, Manti-la-Sal National Forest, Montana’s Gravelly Range, Bighorn Basin in Wyoming, and Bayanzag in Mongolia. 
+Bailey Jørgensen grew up in Montana and got her B.S. in Archaeology at Montana State University. When not at Bren, she works as the Collections Manager at the Alf Museum of Paleontology in Claremont, California. At the museum, she cares for an active research collection and exhibits hall and coleads cohorts of students in paleontological fieldwork and data collection. Her fieldwork areas include backcountry quarries in Grand Staircase Escalante National Monument, sites in the Mojave Desert, Manti-la-Sal National Forest, Montana’s Gravelly Range, Bighorn Basin in Wyoming, and Bayanzag in Mongolia. 
 
 Before finding the Alf Museum, she worked sailing and preserving historic wooden ships for maritime museums and institutes. She helped run programs such as the Topsail STEM Adventure Program and the Beyond the Bell Oceanography Middle School Program at the Los Angeles Maritime Institute. 
 

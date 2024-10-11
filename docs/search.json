@@ -4,13 +4,27 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "What I do for work\nsome test goes here"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Bailey Jorgensen",
+    "title": "Bailey Jørgensen",
     "section": "",
-    "text": "Bailey Jorgensen grew up in Montana and got her B.S. in Archaeology at Montana State University. When not at Bren, she works as the Collections Manager at the Alf Museum of Paleontology in Claremont, California. At the museum, she cares for an active research collection and exhibits hall and coleads cohorts of students in paleontological fieldwork and data collection. Her fieldwork areas include backcountry quarries in Grand Staircase Escalante National Monument, sites in the Mojave Desert, Manti-la-Sal National Forest, Montana’s Gravelly Range, Bighorn Basin in Wyoming, and Bayanzag in Mongolia.\nBefore finding the Alf Museum, she worked sailing and preserving historic wooden ships for maritime museums and institutes. She helped run programs such as the Topsail STEM Adventure Program and the Beyond the Bell Oceanography Middle School Program at the Los Angeles Maritime Institute.\nHer experiences in data management have allowed her to participate in active research and data management. She joined the MEDS program at the Bren School to fully maximize these opportunities, and to deepen the technical knowledge required for more advanced projects. She hopes to continue work in the biodiversity heritage sector, especially for marine environments."
+    "text": "Bailey Jørgensen grew up in Montana and got her B.S. in Archaeology at Montana State University. When not at Bren, she works as the Collections Manager at the Alf Museum of Paleontology in Claremont, California. At the museum, she cares for an active research collection and exhibits hall and coleads cohorts of students in paleontological fieldwork and data collection. Her fieldwork areas include backcountry quarries in Grand Staircase Escalante National Monument, sites in the Mojave Desert, Manti-la-Sal National Forest, Montana’s Gravelly Range, Bighorn Basin in Wyoming, and Bayanzag in Mongolia.\nBefore finding the Alf Museum, she worked sailing and preserving historic wooden ships for maritime museums and institutes. She helped run programs such as the Topsail STEM Adventure Program and the Beyond the Bell Oceanography Middle School Program at the Los Angeles Maritime Institute.\nHer experiences in data management have allowed her to participate in active research and data management. She joined the MEDS program at the Bren School to fully maximize these opportunities, and to deepen the technical knowledge required for more advanced projects. She hopes to continue work in the biodiversity heritage sector, especially for marine environments."
+  },
+  {
+    "objectID": "DELETE-LATER/practice.html",
+    "href": "DELETE-LATER/practice.html",
+    "title": "Here is my level one header",
+    "section": "",
+    "text": "Here is my level one header\nHere is my first paragraph\nHere is my second paragraph, where you can read more about MEDS.\nThis is very important text!"
+  },
+  {
+    "objectID": "about.html#what-i-do-for-fun",
+    "href": "about.html#what-i-do-for-fun",
+    "title": "About",
+    "section": "What I do for fun",
+    "text": "What I do for fun\n\ngive the people what they want\n\nhere is some more text\n\nhere is a line\nhere is another line\n\n\n1 + 1\n\n[1] 2"
   }
 ]

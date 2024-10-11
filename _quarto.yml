@@ -3,22 +3,31 @@ project:
   output-dir: docs
 
 website:
-  title: "Bailey Jorgensen"
+  title: "Bailey Jørgensen"
+  #favicon: #file path for favicon in images folder
   navbar:
+    title: false
+    #logo: #file path for logo in images folder
+    #logo-alt: "my alt text"
     left:
       - href: index.qmd
         text: Home
       - about.qmd
       - href: resources.qmd
         text: Resources
+       #text: CV
+       # href: #file path for cs
+  page-footer:
+    background: dark
+    left: Copyright 2024, Bailey Jørgensen
+    right: This webise is built with {{< fa github title="the octocat github icon" >}}
+
 
 format:
   html:
-    theme:
-      light: minty
-      dark: solar
-    css: styles.css
-    toc: true
+    theme: styles.scss
+    mainfont: Roboto
+    toc: false
     page-layout: article
 
 
