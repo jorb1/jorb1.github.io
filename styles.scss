@@ -1,29 +1,29 @@
 /*-- scss:defaults --*/
 
 // Import Google Fonts
-@import url(<style>
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Grotesk:wght@300..700&display=swap');
-</style>);
 
 // Create font variables
-$spacegrotesk: "Space Grotesk"
+$spacegrotesk: "Space Grotesk", sans-serif;
 
 // Colors
-$color1: #6b3e26;
-$color2: #ffc5d9;
-$color3: #c2f2d0;
-$color4: #fdf5c9;
-$color5: #ffcb85;
-
+$color1: #000000;
+$color2: #00f9ff;
+$color3: #8ffcff;
+$color4: #030056;
+$color5: #0900ff;
 // Quarto Sass Variables
 $navbar-bg: $color1;
 $navbar-fg: $color2;
 $navbar-hl: $color3;
+$footer-bg: $color5;
+$footer-fg: $color4;
 
 /*-- scss:rules --*/
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $Space;
+  font-family: $spacegrotesk;
 }
 
 h1, h2 {
