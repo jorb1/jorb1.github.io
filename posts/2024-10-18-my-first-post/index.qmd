@@ -1,0 +1,56 @@
+---
+title: "Blog Post Title"
+description: "a short catchy description of the blog post"
+author: 
+  - name: Bailey Jørgensen
+    url: https://jorb1.github.io/
+    orchid: 0009-0009-0970-5318
+    affiliation: MEDS
+    affiliation-url: https://bren.ucsb.edu
+date: 2024-10-18
+categories: [EDS, Robots, Boats, Paleontology]
+toc: true
+bibliography: references.bib
+image: PXL_20240306_013220581.jpg
+citation:
+  url: https://jorb1.github.io/posts/2024-10-18-my-first-post/
+draft: TRUE
+draft-mode: visible
+---
+
+## This is my first section
+
+I'm going to insert a footnote here[^1]
+
+[^1]: Here is a new footnote
+
+## This is my second
+
+Here's my next paragraph[^2]
+
+[^2]: Here is my second footnote
+
+here is more random text. im going to cite a journal article now.[@gaynor2022]
+
+```{r}
+#| eval: true
+#| echo: false
+#| warning: false
+#| message: false
+
+library(palmerpenguins)
+library(tidyverse)
+
+ggplot(penguins,
+       aes(x = bill_length_mm,
+           y = bill_depth_mm)) +
+  geom_point()
+
+```
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+knitr::include_graphics("PXL_20240306_013220581.jpg")
+```
+

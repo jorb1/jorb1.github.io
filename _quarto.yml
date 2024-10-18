@@ -9,12 +9,13 @@ website:
     title: false
     #logo: #file path for logo in images folder
     #logo-alt: "my alt text"
-    left:
+    right:
       - href: index.qmd
         text: Home
       - about.qmd
       - href: resources.qmd
         text: Resources
+      - posts.qmd
        #text: CV
        # href: #file path for cs
   page-footer:
