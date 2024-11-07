@@ -1,6 +1,6 @@
 ---
 title: "Bailey Jørgensen"
-image: Bailey Jorgensen_MEDS Headshot 2024_0011.jpeg
+image: photoedit_4github.jpeg
 about: 
   template: broadside
   image-width: 15em
