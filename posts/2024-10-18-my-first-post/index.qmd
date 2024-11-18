@@ -11,7 +11,7 @@ date: 2024-10-18
 categories: [EDS, Robots, Boats, Paleontology]
 toc: true
 bibliography: references.bib
-image: PXL_20240306_013220581.jpg
+image: photoedit_4github.jpg
 citation:
   url: https://jorb1.github.io/posts/2024-10-18-my-first-post/
 draft: TRUE
