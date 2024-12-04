@@ -1,17 +1,31 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts/2024-10-18-my-first-post/index.html",
+    "href": "posts/2024-10-18-my-first-post/index.html",
+    "title": "Blog Post Title",
     "section": "",
-    "text": "What I do for work\nsome test goes here"
+    "text": "I’m going to insert a footnote here1"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Bailey Jørgensen",
+    "objectID": "posts/2024-10-18-my-first-post/index.html#this-is-my-first-section",
+    "href": "posts/2024-10-18-my-first-post/index.html#this-is-my-first-section",
+    "title": "Blog Post Title",
     "section": "",
-    "text": "Bailey Jørgensen grew up in Montana and got her B.S. in Archaeology at Montana State University. When not at Bren, she works as the Collections Manager at the Alf Museum of Paleontology in Claremont, California. At the museum, she cares for an active research collection and exhibits hall and coleads cohorts of students in paleontological fieldwork and data collection. Her fieldwork areas include backcountry quarries in Grand Staircase Escalante National Monument, sites in the Mojave Desert, Manti-la-Sal National Forest, Montana’s Gravelly Range, Bighorn Basin in Wyoming, and Bayanzag in Mongolia.\nBefore finding the Alf Museum, she worked sailing and preserving historic wooden ships for maritime museums and institutes. She helped run programs such as the Topsail STEM Adventure Program and the Beyond the Bell Oceanography Middle School Program at the Los Angeles Maritime Institute.\nHer experiences in data management have allowed her to participate in active research and data management. She joined the MEDS program at the Bren School to fully maximize these opportunities, and to deepen the technical knowledge required for more advanced projects. She hopes to continue work in the biodiversity heritage sector, especially for marine environments."
+    "text": "I’m going to insert a footnote here1"
+  },
+  {
+    "objectID": "posts/2024-10-18-my-first-post/index.html#this-is-my-second",
+    "href": "posts/2024-10-18-my-first-post/index.html#this-is-my-second",
+    "title": "Blog Post Title",
+    "section": "This is my second",
+    "text": "This is my second\nHere’s my next paragraph2\nhere is more random text. im going to cite a journal article now.(Gaynor et al. 2022)"
+  },
+  {
+    "objectID": "posts/2024-10-18-my-first-post/index.html#footnotes",
+    "href": "posts/2024-10-18-my-first-post/index.html#footnotes",
+    "title": "Blog Post Title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHere is a new footnote↩︎\nHere is my second footnote↩︎"
   },
   {
     "objectID": "DELETE-LATER/practice.html",
@@ -21,6 +35,13 @@
     "text": "Here is my level one header\nHere is my first paragraph\nHere is my second paragraph, where you can read more about MEDS.\nThis is very important text!"
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "What I do for work\nsome test goes here"
+  },
+  {
     "objectID": "about.html#what-i-do-for-fun",
     "href": "about.html#what-i-do-for-fun",
     "title": "About",
@@ -28,10 +49,17 @@
     "text": "What I do for fun\n\ngive the people what they want\n\nhere is some more text\n\nhere is a line\nhere is another line\n\n\n1 + 1\n\n[1] 2"
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bailey Jørgensen",
+    "section": "",
+    "text": "Bailey Jørgensen grew up in Montana and got her B.S. in Archaeology at Montana State University. When not at Bren, she works as the Collections Manager at the Alf Museum of Paleontology in Claremont, California. At the museum, she cares for an active research collection and exhibits hall and coleads cohorts of students in paleontological fieldwork and data collection. Her fieldwork areas include backcountry quarries in Grand Staircase Escalante National Monument, sites in the Mojave Desert, Manti-la-Sal National Forest, Montana’s Gravelly Range, Bighorn Basin in Wyoming, and Bayanzag in Mongolia.\nBefore finding the Alf Museum, she worked sailing and preserving historic wooden ships for maritime museums and institutes. She helped run programs such as the Topsail STEM Adventure Program and the Beyond the Bell Oceanography Middle School Program at the Los Angeles Maritime Institute.\nHer experiences in data management have allowed her to participate in active research and data management. She joined the MEDS program at the Bren School to fully maximize these opportunities, and to deepen the technical knowledge required for more advanced projects. She hopes to continue work in the biodiversity heritage sector, especially for marine environments."
+  },
+  {
     "objectID": "posts.html",
     "href": "posts.html",
     "title": "Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "Blog Post Title\n\n\n\nEDS\n\n\nRobots\n\n\nBoats\n\n\nPaleontology\n\n\n\na short catchy description of the blog post\n\n\n\nBailey Jørgensen\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
