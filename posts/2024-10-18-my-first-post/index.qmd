@@ -14,8 +14,8 @@ bibliography: references.bib
 image: photoedit_4github.jpg
 citation:
   url: https://jorb1.github.io/posts/2024-10-18-my-first-post/
-draft: FALSE
-draft-mode: visible
+
+
 ---
 
 ## This is my first section
