@@ -1,0 +1,18 @@
+---
+title: "Thomas Fire Analysis"
+description: "AQI and spatial analysis walkthrough"
+author: 
+  - name: Bailey Jørgensen
+    url: https://jorb1.github.io/
+    orchid: 0009-0009-0970-5318
+    affiliation: MEDS
+    affiliation-url: https://bren.ucsb.edu
+date: 2024-10-18
+categories: [EDS, Robots, Boats, Paleontology]
+toc: true
+image: fire_thom.png
+citation:
+  url: https://jorb1.github.io/posts/2024-12-4-thomas-fire-post/
+
+
+---
