@@ -1,2 +1,4 @@
 title-block-banner: true
 
+# freeze computational output
+freeze: true

@@ -1,0 +1,17 @@
+{
+  "hash": "b68f9fe14e486ce91441254f3211668b",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Blog Post Title\"\ndescription: \"a short catchy description of the blog post\"\nauthor: \n  - name: Bailey Jørgensen\n    url: https://jorb1.github.io/\n    orchid: 0009-0009-0970-5318\n    affiliation: MEDS\n    affiliation-url: https://bren.ucsb.edu\ndate: 2024-10-18\ncategories: [EDS, Robots, Boats, Paleontology]\ntoc: true\nbibliography: references.bib\nimage: PXL_20240306_013220581.jpg\ncitation:\n  url: https://jorb1.github.io/posts/2024-10-18-my-first-post/\n\n\n---\n\n\n## This is my first section\n\nI'm going to insert a footnote here[^1]\n\n[^1]: Here is a new footnote\n\n## This is my second\n\nHere's my next paragraph[^2]\n\n[^2]: Here is my second footnote\n\nhere is more random text. im going to cite a journal article now.[@gaynor2022]\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](PXL_20240306_013220581.jpg){fig-align='center'}\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
