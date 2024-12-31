@@ -10,12 +10,12 @@ website:
     #logo: #file path for logo in images folder
     #logo-alt: "my alt text"
     right:
-      - href: posts.qmd
+      - href: index.qmd
         text: Home
       - about.qmd
       - href: resources.qmd
         text: Resources
-      - index.qmd
+      - posts.qmd
        #text: CV
        # href: #file path for cs
   page-footer:
