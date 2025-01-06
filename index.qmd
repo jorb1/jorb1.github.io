@@ -3,7 +3,7 @@ title: "Bailey Jørgensen"
 image: images/boats.jpg
 about: 
   template: marquee
-  image-width: 15em
+  #image-width: 15em
   links: 
     - text: LinkedIn
       icon: linkedin
