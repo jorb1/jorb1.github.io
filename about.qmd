@@ -16,7 +16,9 @@ about:
       href: mailto:bjorgensen@ucsb.edu
 ---
 <p class="orange-text" center-text>
-## Nice to meet you, I’m Bailey.
+
+## Nice to e-meet you, I’m Bailey.
+
 </p>
 
 
