@@ -1,0 +1,258 @@
+---
+title: "DATA VISUALIZATION: A TALE OF MANY KELPS"
+author: "BAILEY JØRGENSEN"
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+Whew, Data Viz, am I right? a.k.a. “Data Visualization”. Turns out, easier said than done. But, more on that later.
+
+When I first received this data viz assignment from Sam Shanny-Csik for my Environmental Data Science course, I knew I wanted to work on data from KelpWatch.org, an organization that hosts “the world’s largest dynamic map of canopy-forming kelp species, empowering data-driven management and strategic restoration of kelp forest ecosystems.” (I also thought the assignment would be easy, but again, more on that later).
+
+KelpWatch has extensive data you can download directly from their website, and they have even more, and even larger, datasets in a publicly accessible geodatabase. The main kelp feature studied in these datasets is “emergent kelp canopy”, or kelp that grows long and lush enough to float on the surface of the ocean. This kelp acts as habitat for countless marine organisms.
+
+But, as I experienced when trying to create this visualization, actually seeing and measuring this kelp canopy is not as easy as it sounds. How, you might ask? Well, let me cut to the chase and show you my final infographic:
+
+![An infographic, with big bold white letters on a black background, describing how while it is possible to see kelp canopy from space, the variability of the kelp by season necessitates seasonal averaging for analyzing broader trends in coverage over time.](hw4-finalviz-eds240.png)
+
+This infographic tells a story. Most importantly, it tells the story of how kelp canopy is measured using remote sensing. But, it also tells the story of my own struggles wrangling this dataset.
+
+When I first set out, the questions I wanted to answer with an infographic were quite different. And, they changed several times during the quarter as I worked through the various homework assignments. I played around with a few different themes and charts, and found myself spending hours on visualizations that I ultimately wasn’t proud of, or actively disliked. The huge datasets were difficult to work with, and required using skill sets I hadn’t fully developed yet (gigantic .nc files, anyone?)
+
+I felt like every graphic I made didn’t quite capture the amazing information about kelp and the complex lives it leads. Every graphic was boring, or redundant, or didn’t say anything that really stood out or made me happy. On the verge of giving up and turning in something crappy, I decided I really needed to step back. What story could this data tell, that would make me happy to tell it?
+
+Well, why not make an infographic about what I had learned while working with this data? Specifically, why wasn’t it as easy as it sounds to just look at kelp from a satellite and know everything about it? And to make it even more my own, why not make it themed like space! Space, with a touch of beautiful green bioluminescence and big bold letters.
+
+To tell this story, I feel like it HAD to be an infographic. Specifically, one that guides the readers through a data science, remote sensing story. The intended audience is someone, maybe a student or enthusiast, who is interested in remote sensing for biology, and the interesting challenges and details that arise when doing so.
+
+Even though I wanted the infographic to be dynamic, I didn’t want it to be TOO crowded with text. So, on the plots themselves, I opted for a very minimalist approach, removing text whenever possible, without obscuring what the graphs were trying to communicate. The descriptive text within the infographic functions as the titles and subtitles of the plots, as the reader is guided downward through the story.
+
+The colors and typography, as I mentioned, I wanted to accentuate the remote-sensing aspect of it. Make it about space, or at least visualizing things from orbit. I wanted it to look like seeing the earth at night, with some bioluminescence from the ocean illuminating what I want to see. The big, bold letters stand out against the dark background and add to a futuristic, nighttime look. Through the simplicity of the color palettes and the simple but intentional wording, I think I managed to create a graphic with DEI and accessibility in mind, as anyone who is enthusiastic about data science or remote sensing could hopefully gain something from seeing it, even if they are new to the field.
+
+The end result, I believe, avoids the information overload and crowding of boring facts and visuals that I struggled with before. It gives viewers context about the data I was working with, and the unique challenges that it presented. In the end, it conveys the primary message of the variability of kelp, and how this presents a challenge when analyzing it through remote sensing. For me personally, it conveys a secondary message, which is to not force your data to tell you something - instead present what it tells you, and do so in a way that is true to what makes me visually happy.
+
+Wanna see the code? Unfold the chunk!
+
+```{r}
+#| eval: true
+#| echo: false
+#| warning: false
+
+# Load libraries
+librarian::shelf(tidyverse, here, janitor, waffle, showtext, scales, tidync, sf, terra, tmap, tmaptools)
+
+# Import font
+font_add_google(name = "Poppins", family = "poppins")
+showtext_auto(enable = TRUE)
+
+# Define a color palette
+kelp_palette <- c("winter" = "yellowgreen", 
+                    "spring" = "seagreen1", 
+                    "summer" = "seagreen3", 
+                    "fall" = "#357266")
+
+# Read in KelpWatch data for waffle chart and line plot
+kelp_central <- read_csv(here("data", "central_california_kelp.csv"))
+kelp_north <- read_csv(here("data", "northern_california_kelp.csv"))
+kelp_south <- read_csv(here("data", "southern_california_kelp.csv"))
+
+# Read in KelpWatch data for map
+kelpwatch_raw <- tidync(here("data", "LandsatKelpBiomass_2024_Q4_withmetadata.nc"))
+
+
+# Wrangle data for waffle chart and line plot
+
+# Add a column to each df that specifies its region
+kelp_central <- kelp_central %>% mutate(region = "central")
+kelp_north <- kelp_north %>% mutate(region = "northern")
+kelp_south <- kelp_south %>% mutate(region = "southern")
+
+# Bind the three dfs together
+kelp <- bind_rows(kelp_central, kelp_north, kelp_south)
+
+# Filter to just one year: 2023, and one region
+kelp_2023_south <- kelp |>
+  filter(year == 2023) |>
+  filter(region == "southern")
+
+# Wrangle data for waffle chart
+waffle_kelp <- kelp_2023_south |>
+  filter(quarter != "max") |> 
+  mutate(quarter = recode(quarter,
+                          "1" = "winter",
+                          "2" = "spring",
+                          "3" = "summer",
+                          "4" = "fall"))
+
+# Wrange data from line plot 
+kelp_line_thru_time <- kelp |>
+  filter(quarter == "max") |>
+  filter(region == "southern")
+
+# Wrangle data for map
+
+# Transform the latitude grid into a data frame
+kelp_lat <- kelpwatch_raw |> 
+  activate("latitude") |> 
+  hyper_tibble()
+
+# Transform the longitude grid into a data frame
+kelp_lon <- kelpwatch_raw |> 
+  activate("longitude") |> 
+  hyper_tibble()
+
+# Join the two geo info
+kelp_latlon <- left_join(kelp_lat, kelp_lon, by = "station") |> 
+  relocate(station, .before=everything()) |> 
+  # Make into sf object
+  st_as_sf(coords=c("longitude", "latitude"), crs=4326, remove=FALSE) |> 
+  # Reproject to linear units (NAD UTM 10)
+  st_transform(crs = 26910)
+
+# Transform the biomass grid into a data frame
+kelpwatch_df <- kelpwatch_raw |> 
+  hyper_tibble(force = TRUE)
+
+# Transform the time grid into a data frame
+kelp_time <- kelpwatch_raw |>  
+  activate("year") |>  
+  hyper_tibble()
+
+# Join the kelp data with the time grid
+kelp <- left_join(kelpwatch_df, kelp_time)
+
+# Filter the kelp data for the stations that intersect and years of interest
+kelp <- kelp |> 
+  #filter(station %in% site_station$station) %>% 
+  filter(year == 2023)
+
+# Since we are interested in the max value only, can drop the zeroes 
+kelp_present <- kelp |> 
+  filter(!(area == 0)) |>  
+  filter(!is.na(area)) |>  
+  dplyr::select(station, year, area)
+
+# Calculate annual max
+kelp_annual <- kelp_present |> 
+  arrange(station, year) |> 
+  group_by(station, year, .drop = T) |> 
+  summarise_all(max, na.rm = T) 
+
+yearly_data <- left_join(kelp_annual, kelp_latlon) |> 
+  st_as_sf()
+
+# Define the bounding box for the Channel Islands area (approximate)
+channel_islands_bbox <- st_bbox(c(xmin = -120.5, ymin = 33.9, xmax = -119.5, ymax = 34.1), crs = st_crs(4326))
+
+# Convert bounding box to an sf object
+channel_islands_polygon <- st_as_sfc(channel_islands_bbox) |>
+  st_transform(channel_islands_polygon, crs = st_crs(yearly_data))
+
+# Filter the geospatial data to include only points within the Channel Islands area
+islands <- yearly_data |> 
+  st_intersection(channel_islands_polygon)
+  
+
+# VIZ 1:
+
+# Create plot labels
+title <- "Kelp Coverage Changes Dramatically by Season"
+subtitle <- "SoCal Kelp Canopy Visible from Space in 2023"
+caption <- "Source: KelpWatch"
+
+# Factorize seasons so they plot in order in legend
+waffle_kelp$quarter <- factor(waffle_kelp$quarter, 
+                             levels = c("winter", "spring", "summer", "fall"))
+
+# Create a waffle chart
+wafflechart_tasty <- ggplot(waffle_kelp, aes(fill = quarter, values = kelp_area_m2)) +
+  geom_waffle(color = "black", size = 0.3, n_rows = 5,
+              make_proportional = TRUE) +
+  coord_fixed() +
+  scale_fill_manual(values = kelp_palette) +
+  labs(title = title,
+       subtitle = subtitle,
+       caption = caption) +
+  theme_void() +
+  theme(
+    # plot.title = element_text(family = "poppins",
+    #                           color = "white",
+    #                           size = 17, 
+    #                           hjust = 0.5,
+    #                           margin = margin(t = 0, r = 0, b = 0.3, l = 0, "cm")),
+    # plot.subtitle = element_text(family = "poppins",
+    #                              color = "white",
+    #                              size = 16,
+    #                              hjust = 0.5,
+    #                              margin = margin(t = 0, r = 0, b = 0.5, l = 0, "cm")),
+    # plot.caption = element_text(family = "poppins",
+    #                             size = 10,
+    #                             color = "gray", 
+    #                             margin = margin(t = 0.75, r = 0, b = 0, l = 0, "cm")),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(family = "poppins",
+                               size = 12,
+                               color = "gray"),
+    plot.background = element_rect(fill = "black", 
+                                   color = "black"),
+    plot.margin = margin(t = 2, r = 2, b = 2, l = 2, "cm")
+  )
+
+# VIZ 2
+
+# Function to format numbers with "million" suffix
+format_million <- function(x) {
+  paste0(comma(x / 1e6), " million m²")
+}
+
+lineplot_kelp_time_final <- ggplot(kelp_line_thru_time, aes(x = year, y = kelp_area_m2)) +
+  geom_line(color = "seagreen3", size = 1.5) + 
+  geom_point(color = "yellowgreen", size = 2) +
+  theme_minimal() +
+  theme(
+    # Set aspect ratio
+    aspect.ratio = 1/5,
+    
+    # Remove axis titles
+    axis.title.y = element_blank(),
+    axis.title.x = element_blank(),
+    
+    # Set panel and plot background to black
+    panel.background = element_rect(fill = "black", color = NA),
+    plot.background = element_rect(fill = "black", color = NA),
+    
+    # Set text elements to white
+    text = element_text(family = "poppins", color = "white"),
+    axis.text = element_text(family = "poppins", color = "white"),
+    # Set text elements to Poppins font
+    
+    
+    # Set grid lines to dark gray or remove them
+    panel.grid.major = element_line(color = "gray30"),
+    panel.grid.minor = element_line(color = "gray20")
+  ) +
+  scale_y_continuous(labels = format_million)
+
+# VIZ 3:
+# Map
+# Transform
+islands_geo <- st_transform(islands, 4326)  # Transform to WGS84 (lat/long)
+
+map_notitle <- tm_shape(islands_geo) +
+  tm_dots(col = "seagreen3",
+          fill = "seagreen3") +
+  tm_grid(labels.col = "gray") +  # Use default grid settings
+  tm_layout(
+    bg.color = "black",
+    outer.bg.color = "black"
+  ) 
+
+```
