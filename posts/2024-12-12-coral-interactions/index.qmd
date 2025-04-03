@@ -8,6 +8,7 @@ format:
   html:
     code-fold: true
     toc: true
+image: deepseacoral_callout.jpg
 editor_options: 
   chunk_output_type: console
 ---
