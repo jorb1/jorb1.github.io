@@ -4,15 +4,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Grotesk:wght@300..700&display=swap');
 
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
 // Create font variables
 $spacegrotesk: "Space Grotesk", sans-serif;
 
 // Colors
 $color1: #000000;
-$color2: #00f9ff;
+$color2: #FFFFFF;
 $color3: #8ffcff;
-$color4: #030056;
-$color5: #0900ff;
+$color4: #000000;
+$color5: #00f9ff;
 
 // Quarto Sass Variables
 $navbar-bg: $color1;
@@ -27,6 +29,10 @@ $footer-fg: $color4;
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $spacegrotesk;
+}
+
+h1.page-title {
+  display: none;
 }
 
 h1, h2 {
@@ -45,11 +51,61 @@ h1, h2 {
 
 
 .orange-text {
-  text-align:center;
+  text-align: center;
   color: $color5;
+  font-size: 2rem;
+  font-weight: bold
+}
+
+.body-text {
+  font-size: 1.2rem; /* Increases the font size slightly */
+  line-height: 1.8;  /* Improves line spacing for readability */
+  margin: 20px 0;    /* Adds vertical spacing around the block */
+  color: $color2;    /* Optional: Ensures the text color is readable */
+  text-align: justify; /* Optional: Justifies the text for a clean look */
 }
 
 .navbar-brand img {
   max-height: 40px;
   width: auto;
 }
+
+nav {
+  font-size: 1.2rem; /* Adjust font size of navbar text */
+  height: 90px;      /* Change navbar height */
+}
+
+nav a {
+  font-size: 1.2rem; /* Customize size of links in navbar */
+  padding: 10px 20px; /* Add spacing around navbar items */
+}
+
+nav .navbar-title {
+  font-size: 4.2rem;    /* Change size of the navbar title */
+  font-weight: bold;  /* Adjust font weight */
+  margin-bottom: 150px;
+}
+
+body {
+  color: $color2; /* Use the white color variable you've defined */
+  background-color: $color1; /* Ensure the background remains dark */
+}
+
+main {
+  margin-top: 150px; /* Adds space below the navbar */
+}
+
+.posts {
+  padding-top: 150px; /* Adds space before the post listing */
+}
+
+a i {
+  color: $color5; /* Default icon color (use your desired color variable) */
+  transition: color 0.3s ease; /* Adds a smooth color transition on hover */
+}
+
+a:hover i {
+  color: #8ffcff; /* Hover color for the icons */
+}
+
+

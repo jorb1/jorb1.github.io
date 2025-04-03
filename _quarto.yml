@@ -6,29 +6,33 @@ website:
   title: "Bailey Jørgensen"
   #favicon: #file path for favicon in images folder
   navbar:
-    title: false
+    title: BAILEY JØRGENSEN, MSc
     #logo: #file path for logo in images folder
     #logo-alt: "my alt text"
     right:
       - href: index.qmd
-        text: Home
-      - about.qmd
+        text: PORTFOLIO
+      - href: about.qmd
+        text: About
       - href: resources.qmd
         text: Resources
-      - posts.qmd
-       #text: CV
-       # href: #file path for cs
+      - href: cv.qmd
+        text: Resume
+      - href: contact.qmd
+        text: Contact
+
   page-footer:
     background: dark
     left: Copyright 2024, Bailey Jørgensen
-    right: This webise is built with {{< fa github title="the octocat github logo" >}}
+    right: This website is built with {{< fa github title="the octocat github logo" >}}
 
 
 format:
   html:
     theme: styles.scss
     mainfont: Roboto
+    fontcolor: "#FFFFFF"
     toc: false
-    page-layout: article
+    page-layout: full
 
 

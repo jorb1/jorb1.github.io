@@ -1,28 +1,28 @@
 ---
 #title: "Bailey Jørgensen"
-image: images/photoedit_4github.jpg
+#image: images/photoedit_4github.jpg
 about: 
-  template: broadside
-  image-width: 15em
-  links: 
-    - text: LinkedIn
-      icon: linkedin
-      href: www.linkedin.com/in/bailey-jorgensen-a0a467271
-      target: _blank
-    - text: GitHub
-      href: https://github.com/jorb1
-      target: _blank
-    - text: Email
-      href: mailto:bjorgensen@ucsb.edu
+  template: marquee
+  image-width: 30em
+
 ---
-<p class="orange-text" center-text>
-
-## Nice to e-meet you, I’m Bailey.
-
+<p class="orange-text">
+  Nice to e-meet you, I’m Bailey.
 </p>
 
 
-*Data management and mapping is my day-passion. Marine secrets and wonders are my life-passion. When I’m not deepening my technical knowledge of data and coding at UC Santa Barbara Bren, caring for an active research collection and exhibits hall at the Alf Museum of Paleontology takes up most of my professional time. Sailing and preserving historic wooden ships for maritime museums and institutes ignited my interest in the heritage sector. Paleontological fieldwork and data and collection in the deserts of Utah, California, Wyoming, Montana and Mongolia solidified it. Have a project in the biodiversity heritage sector? (Bonus points if its for marine environments.) Let’s chat!*
+<div class="body-text">
+Data management and mapping is my day-passion. Marine secrets and wonders are my life-passion. When I’m not deepening my technical knowledge of data and coding at UC Santa Barbara Bren, caring for an active research collection and exhibits hall at the Alf Museum of Paleontology takes up most of my professional time. Sailing and preserving historic wooden ships for maritime museums and institutes ignited my interest in the heritage sector. Paleontological fieldwork and data and collection in the deserts of Utah, California, Wyoming, Montana and Mongolia solidified it. Have a project in the biodiversity heritage sector? (Bonus points if its for marine environments.) Let’s chat!
+</div>
 
 
+<div style="text-align: center;">
+  <img src="images/photoedit_4github.jpg" alt="Bailey Jørgensen" style="width: 30em;">
+</div>
 
+
+<div style="text-align: center;">
+  [<i class="fab fa-linkedin fa-2x"></i>](https://www.linkedin.com/in/bailey-jorgensen-a0a467271){target="_blank"} &nbsp;
+  [<i class="fab fa-github-alt fa-2x"></i>](https://github.com/jorb1){target="_blank"} &nbsp;
+  [<i class="fa fa-envelope fa-2x"></i>](mailto:bjorgensen@bren.ucsb.edu)
+</div>

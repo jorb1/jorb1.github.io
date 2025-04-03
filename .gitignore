@@ -8,3 +8,21 @@
 .httr-oauth
 .DS_Store
 .quarto
+
+
+# Ignore build output
+docs/
+
+# Ignore Quarto cache
+.quarto-cache/
+
+# Editor-specific files
+*.swp
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
