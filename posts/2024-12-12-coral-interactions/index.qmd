@@ -14,6 +14,8 @@ format:
 image: deepseacoral_callout.jpg
 editor_options: 
   chunk_output_type: console
+citation:
+  url: https://jorb1.github.io/posts/2024-12-12-coral-interactions/
 ---
 
 ::: {layout-ncol=3}
