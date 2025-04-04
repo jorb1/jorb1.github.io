@@ -11,10 +11,10 @@
 
 
 # Ignore build output
-docs/
+#docs/
 
 # Ignore Quarto cache
-.quarto-cache/
+#.quarto-cache/
 
 # Editor-specific files
 *.swp
