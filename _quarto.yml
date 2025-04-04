@@ -32,8 +32,8 @@ website:
 
   page-footer:
     background: dark
-    left: Copyright 2024, Bailey Jørgensen
-    right: This website is built with {{< fa github title="the octocat github logo" >}}
+    left: '{{< fa copyright >}} 2025, Bailey Jørgensen'
+    right: This website is built with {{< fa brands github title="The GitHub octocat logo" >}}
 
 
 format:
