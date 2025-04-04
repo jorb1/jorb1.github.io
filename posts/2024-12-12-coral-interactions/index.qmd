@@ -1,6 +1,9 @@
 ---
-title: "USING AN INTERACTIONS MODEL TO ANALYZE THE RELATIONSHIP BETWEEN DEEP SEA CORALS, LATITUDE, AND OCEAN DEPTH"
+title: "EXPERIMENTING WITH A DEEP SEA CORAL INTERACTIONS MODEL"
+description: "Analyzing the relationship between deep sea corals, latitude, and ocean depth"
 author: "BAILEY JØRGENSEN"
+date: 2024-12-12
+categories: [EDS]
 execute:
   warning: false
   message: false
