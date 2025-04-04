@@ -4,7 +4,7 @@ project:
 
 website:
   title: "Bailey Jørgensen"
-  #favicon: #file path for favicon in images folder
+  favicon: images/lineguy.png
   navbar:
     title: BAILEY JØRGENSEN, MSc
     #logo: #file path for logo in images folder
