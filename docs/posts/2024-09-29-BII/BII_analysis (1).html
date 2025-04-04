@@ -1,0 +1,2775 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bailey Jørgensen">
+<meta name="dcterms.date" content="2024-09-29">
+<meta name="description" content="A geospatial analysis in Python">
+
+<title>Biodiversity Intactness Index (BII) change in Phoenix, AZ – Bailey Jørgensen</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">BAILEY JØRGENSEN, MSc</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">PORTFOLIO</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Biodiversity Intactness Index (BII) change in Phoenix, AZ</h1>
+                  <div>
+        <div class="description">
+          A geospatial analysis in Python
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">EDS</div>
+                <div class="quarto-category">Geospatial</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Bailey Jørgensen </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 29, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About:</a>
+  <ul class="collapse">
+  <li><a href="#citations-and-data-access-links" id="toc-citations-and-data-access-links" class="nav-link" data-scroll-target="#citations-and-data-access-links">Citations and Data Access Links:</a></li>
+  </ul></li>
+  <li><a href="#visualization-map-of-phoenix-county-az" id="toc-visualization-map-of-phoenix-county-az" class="nav-link" data-scroll-target="#visualization-map-of-phoenix-county-az">Visualization: Map of Phoenix County AZ</a></li>
+  <li><a href="#biodiversity-intactness-index" id="toc-biodiversity-intactness-index" class="nav-link" data-scroll-target="#biodiversity-intactness-index">Biodiversity Intactness Index</a></li>
+  <li><a href="#calculating-the-percentage-of-area-of-the-phoenix-subdivision-with-a-bii-of-at-least-0.75-in-2017-and-2020." id="toc-calculating-the-percentage-of-area-of-the-phoenix-subdivision-with-a-bii-of-at-least-0.75-in-2017-and-2020." class="nav-link" data-scroll-target="#calculating-the-percentage-of-area-of-the-phoenix-subdivision-with-a-bii-of-at-least-0.75-in-2017-and-2020.">Calculating the percentage of area of the Phoenix subdivision with a BII of at least 0.75 in 2017 and 2020.</a></li>
+  <li><a href="#visualization-biodiversity-loss" id="toc-visualization-biodiversity-loss" class="nav-link" data-scroll-target="#visualization-biodiversity-loss">Visualization: Biodiversity Loss</a></li>
+  <li><a href="#final-visualization" id="toc-final-visualization" class="nav-link" data-scroll-target="#final-visualization">Final Visualization:</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#citations-and-data-access" id="toc-citations-and-data-access" class="nav-link" data-scroll-target="#citations-and-data-access">Citations and Data Access:</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="about" class="level2">
+<h2 class="anchored" data-anchor-id="about">About:</h2>
+<p><strong>Purpose:</strong> In 2021, Maricopa County —home to the Phoenix metropolitan area— was identified as the U.S. county with the most significant increase in developed land since 2001. This rapid urban sprawl has profound implications for biodiversity and the health of surrounding natural ecosystems.</p>
+<p>In this notebook, I will investigate the impacts of urban expansion by analyzing a dataset that captures values for the Biodiversity Intactness Index (BII). Apecifically, I will examine changes in BII in the Phoenix county subdivision area between 2017 and 2020, shedding light on how urban growth affects biodiversity over time.</p>
+<p><strong>Highlights:</strong> 1. Accessing the Microsoft Planetary Computer to Access their Impact Observatory data.</p>
+<ol start="2" type="1">
+<li><p>Creating a plot of the Biodiversity Intactness Index within the Phoenix subdivision polygon.</p></li>
+<li><p>Calculate the percentage of area of the Phoenix area with a BII index of at least .07 in 2017 and 2020.</p></li>
+<li><p>Plotting the 2020 data, revealing areas that show a loss of biodiversity.</p></li>
+</ol>
+<p><strong>About the data:</strong> 1. The first data set is is the Biodiversity Intactness Index (BII) Time Series. Access the io-biodiversity collection from the Microsoft Planetary Computer STAC catalog. I will be using the 2017 and 2020 rasters covering the Phoenix subdivision.</p>
+<ol start="2" type="1">
+<li>The second data set is the Phoenix Subdivision Shapefile Download the Phoenix subdivision polygon from the Census County Subdivision shapefiles for Arizona. All legal boundaries and names are as of January 1, 2024. The 2024 TIGER/Line Shapefiles were released on September 25, 2024. https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2022&amp;layergroup=County+Subdivisions</li>
+</ol>
+<section id="citations-and-data-access-links" class="level3">
+<h3 class="anchored" data-anchor-id="citations-and-data-access-links">Citations and Data Access Links:</h3>
+<p>C. Galaz García, EDS 220 - Working with Environmental Datasets, Course Notes. 2024. [Online]. Available: https://meds-eds-220.github.io/MEDS-eds-220-course/book/preface.html</p>
+<p>Microsoft Planetary Computer, STAC Catalog. Biodiversity Intactness (‘io-biodiversity’). [Dataset]. https://planetarycomputer.microsoft.com/dataset/io-biodiversity Accessed 2 December 2024.</p>
+<p>United States Census Bureau. (2022). Arizona County Subdivision 2022 TIGER/Line Shapefiles. [Data File]. U.S. Census Bureau, Geography Division. https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2022&amp;layergroup=County+Subdivisions Accessed 2 December 2024.</p>
+<p>Both of these datasets were accessed for this analysis on 12/2/2024.</p>
+<div id="ece60ffc-9eb2-49b6-908c-36379a5e4986" class="cell" data-tags="[]" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> planetary_computer</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pystac_client</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rich.table</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geogif <span class="im">import</span> gif</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rioxarray <span class="im">as</span> rioxr</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> box</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rasterio</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rasterio.windows <span class="im">import</span> from_bounds</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextily <span class="im">as</span> ctx</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.lines <span class="im">import</span> Line2D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To begin the analysis, I will first read in and explore the shapefile data that I have for Arizona, specifically looking for the Phoenix area.</p>
+<div id="3da0024f-8950-44c7-a4d7-aef6c79cbd6b" class="cell" data-tags="[]" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in shapefile data for Arizona</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>arizona <span class="op">=</span> gpd.read_file(<span class="st">'data/tl_2022_04_cousub.shp'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>arizona.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">STATEFP</th>
+<th data-quarto-table-cell-role="th">COUNTYFP</th>
+<th data-quarto-table-cell-role="th">COUSUBFP</th>
+<th data-quarto-table-cell-role="th">COUSUBNS</th>
+<th data-quarto-table-cell-role="th">GEOID</th>
+<th data-quarto-table-cell-role="th">NAME</th>
+<th data-quarto-table-cell-role="th">NAMELSAD</th>
+<th data-quarto-table-cell-role="th">LSAD</th>
+<th data-quarto-table-cell-role="th">CLASSFP</th>
+<th data-quarto-table-cell-role="th">MTFCC</th>
+<th data-quarto-table-cell-role="th">CNECTAFP</th>
+<th data-quarto-table-cell-role="th">NECTAFP</th>
+<th data-quarto-table-cell-role="th">NCTADVFP</th>
+<th data-quarto-table-cell-role="th">FUNCSTAT</th>
+<th data-quarto-table-cell-role="th">ALAND</th>
+<th data-quarto-table-cell-role="th">AWATER</th>
+<th data-quarto-table-cell-role="th">INTPTLAT</th>
+<th data-quarto-table-cell-role="th">INTPTLON</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>04</td>
+<td>005</td>
+<td>91198</td>
+<td>01934931</td>
+<td>0400591198</td>
+<td>Flagstaff</td>
+<td>Flagstaff CCD</td>
+<td>22</td>
+<td>Z5</td>
+<td>G4040</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>S</td>
+<td>12231052883</td>
+<td>44653332</td>
+<td>+35.1066114</td>
+<td>-111.3662497</td>
+<td>POLYGON ((-112.13370 35.85596, -112.13368 35.8...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>04</td>
+<td>005</td>
+<td>91838</td>
+<td>01934953</td>
+<td>0400591838</td>
+<td>Kaibab Plateau</td>
+<td>Kaibab Plateau CCD</td>
+<td>22</td>
+<td>Z5</td>
+<td>G4040</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>S</td>
+<td>7228864534</td>
+<td>29327221</td>
+<td>+36.5991097</td>
+<td>-112.1368033</td>
+<td>POLYGON ((-112.66039 36.53941, -112.66033 36.5...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>04</td>
+<td>005</td>
+<td>91683</td>
+<td>01934950</td>
+<td>0400591683</td>
+<td>Hualapai</td>
+<td>Hualapai CCD</td>
+<td>22</td>
+<td>Z5</td>
+<td>G4040</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>S</td>
+<td>2342313339</td>
+<td>3772690</td>
+<td>+35.9271665</td>
+<td>-113.1170408</td>
+<td>POLYGON ((-113.35416 36.04097, -113.35416 36.0...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="0293cdfe-f40d-46cc-be37-159fdb82242a" class="cell" data-tags="[]" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean up Arizona data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>arizona.columns <span class="op">=</span> arizona.columns.<span class="bu">str</span>.lower()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select just the Phoenix area</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>phoenix <span class="op">=</span> arizona[arizona.name <span class="op">==</span> <span class="st">"Phoenix"</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a quick plot of the Phoenix shape</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>phoenix.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BII_analysis (1)_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When making maps it’s important to know what Coordinate Reference System we are dealing with. Let’s check what we have for the Phoenix file:</p>
+<div id="c50da434-b6e2-48b6-83b6-04ffd221e2ee" class="cell" data-tags="[]" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phoenix.crs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;Geographic 2D CRS: EPSG:4269&gt;
+Name: NAD83
+Axis Info [ellipsoidal]:
+- Lat[north]: Geodetic latitude (degree)
+- Lon[east]: Geodetic longitude (degree)
+Area of Use:
+- name: North America - onshore and offshore: Canada - Alberta; British Columbia; Manitoba; New Brunswick; Newfoundland and Labrador; Northwest Territories; Nova Scotia; Nunavut; Ontario; Prince Edward Island; Quebec; Saskatchewan; Yukon. Puerto Rico. United States (USA) - Alabama; Alaska; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Hawaii; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming. US Virgin Islands. British Virgin Islands.
+- bounds: (167.65, 14.92, -40.73, 86.45)
+Datum: North American Datum 1983
+- Ellipsoid: GRS 1980
+- Prime Meridian: Greenwich</code></pre>
+</div>
+</div>
+<p>Now that I have my Arizona data looking how I want it, lets access the Microsoft Planetary Computer!</p>
+<div id="fbe7578d-6e4f-4fa1-9611-3c9e024f1c39" class="cell" data-tags="[]" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the MPC catalog</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>catalog <span class="op">=</span> pystac_client.Client.<span class="bu">open</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://planetarycomputer.microsoft.com/api/stac/v1"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    modifier<span class="op">=</span>planetary_computer.sign_inplace,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>catalog.get_collections()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>collections <span class="op">=</span> <span class="bu">list</span>(catalog.get_collections())</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the number of collections</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Number of collections:'</span>, <span class="bu">len</span>(collections))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Pull out the Impact Observatory collection</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>io_collection <span class="op">=</span> catalog.get_child(<span class="st">'io-biodiversity'</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>io_collection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of collections: 124</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+
+<style>
+.pystac-summary {
+    cursor: pointer;
+    display: list-item;
+    list-style: revert;
+    margin-bottom: 0 !important;
+
+    .pystac-l {
+        padding-left: 0.5em;
+        color: rgb(64, 128, 128);
+        font-style: italic;
+    }
+}
+.pystac-row {
+    overflow-wrap: break-word;
+    padding-left: .825em;
+
+    .pystac-k {
+        display: inline-block;
+        margin: 0px 0.5em 0px 0px;
+    }
+    .pystac-v {
+        color: rgb(186, 33, 33);
+    }
+}
+.pystac-k {
+    color: rgb(0, 128, 0);
+    font-weight: 700;
+}
+</style>
+<div class="jp-RenderedJSON jp-mod-trusted jp-OutputArea-output">
+    <div class="container" style="line-height: normal;">
+        <ul style="padding: 0px; margin: 0px; list-style: none; display: block;">
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"Collection"</span>
+        </li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">id</span>
+            <span class="pystac-v">"io-biodiversity"</span>
+        </li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">stac_version</span>
+            <span class="pystac-v">"1.0.0"</span>
+        </li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">description</span>
+            <span class="pystac-v">"Generated by [Impact Observatory](https://www.impactobservatory.com/), in collaboration with [Vizzuality](https://www.vizzuality.com/), these datasets estimate terrestrial Biodiversity Intactness as 100-meter gridded maps for the years 2017-2020.
+
+Maps depicting the intactness of global biodiversity have become a critical tool for spatial planning and management, monitoring the extent of biodiversity across Earth, and identifying critical remaining intact habitat. Yet, these maps are often years out of date by the time they are available to scientists and policy-makers. The datasets in this STAC Collection build on past studies that map Biodiversity Intactness using the [PREDICTS database](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.2579) of spatially referenced observations of biodiversity across 32,000 sites from over 750 studies. The approach differs from previous work by modeling the relationship between observed biodiversity metrics and contemporary, global, geospatial layers of human pressures, with the intention of providing a high resolution monitoring product into the future.
+
+Biodiversity intactness is estimated as a combination of two metrics: Abundance, the quantity of individuals, and Compositional Similarity, how similar the composition of species is to an intact baseline. Linear mixed effects models are fit to estimate the predictive capacity of spatial datasets of human pressures on each of these metrics and project results spatially across the globe. These methods, as well as comparisons to other leading datasets and guidance on interpreting results, are further explained in a methods [white paper](https://ai4edatasetspublicassets.blob.core.windows.net/assets/pdfs/io-biodiversity/Biodiversity_Intactness_whitepaper.pdf) entitled “Global 100m Projections of Biodiversity Intactness for the years 2017-2020.”
+
+All years are available under a Creative Commons BY-4.0 license.
+"</span>
+        </li>
+    
+                
+            
+                
+                    <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">links</span><span class="pystac-l">[] 7 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">0</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">rel</span>
+            <span class="pystac-v">"items"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"https://planetarycomputer.microsoft.com/api/stac/v1/collections/io-biodiversity/items"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"application/geo+json"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">1</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">rel</span>
+            <span class="pystac-v">"root"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"https://planetarycomputer.microsoft.com/api/stac/v1/"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"application/json"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"Microsoft Planetary Computer STAC API"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">2</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">rel</span>
+            <span class="pystac-v">"license"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"https://creativecommons.org/licenses/by/4.0/"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"text/html"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"CC BY 4.0"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">3</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">rel</span>
+            <span class="pystac-v">"about"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"https://ai4edatasetspublicassets.blob.core.windows.net/assets/pdfs/io-biodiversity/Biodiversity_Intactness_whitepaper.pdf"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"application/pdf"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"Technical White Paper"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">4</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">rel</span>
+            <span class="pystac-v">"describedby"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"https://planetarycomputer.microsoft.com/dataset/io-biodiversity"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"text/html"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"Human readable dataset overview and reference"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">5</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">rel</span>
+            <span class="pystac-v">"self"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"https://planetarycomputer.microsoft.com/api/stac/v1/collections/io-biodiversity"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"application/json"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">6</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">rel</span>
+            <span class="pystac-v">"parent"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"https://planetarycomputer.microsoft.com/api/stac/v1"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"application/json"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"Microsoft Planetary Computer STAC API"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+                
+            
+                
+                    <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">stac_extensions</span><span class="pystac-l">[] 3 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"https://stac-extensions.github.io/item-assets/v1.0.0/schema.json"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">1</span>
+            <span class="pystac-v">"https://stac-extensions.github.io/raster/v1.1.0/schema.json"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">2</span>
+            <span class="pystac-v">"https://stac-extensions.github.io/table/v1.2.0/schema.json"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+                
+            
+                
+                    
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">item_assets</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">data</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"image/tiff; application=geotiff; profile=cloud-optimized"</span>
+        </li>
+    
+            
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">roles</span><span class="pystac-l">[] 1 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"data"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"Biodiversity Intactness"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">description</span>
+            <span class="pystac-v">"Terrestrial biodiversity intactness at 100m resolution"</span>
+        </li>
+    
+            
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">raster:bands</span><span class="pystac-l">[] 1 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">0</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">sampling</span>
+            <span class="pystac-v">"area"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">data_type</span>
+            <span class="pystac-v">"float32"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">spatial_resolution</span>
+            <span class="pystac-v">100</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">msft:region</span>
+            <span class="pystac-v">"westeurope"</span>
+        </li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">msft:container</span>
+            <span class="pystac-v">"impact"</span>
+        </li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">msft:storage_account</span>
+            <span class="pystac-v">"pcdata01euw"</span>
+        </li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">msft:short_description</span>
+            <span class="pystac-v">"Global terrestrial biodiversity intactness at 100m resolution for years 2017-2020"</span>
+        </li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"Biodiversity Intactness"</span>
+        </li>
+    
+                
+            
+                
+                    
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">extent</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">spatial</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">bbox</span><span class="pystac-l">[] 1 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">0</span><span class="pystac-l">[] 4 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">-180</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">1</span>
+            <span class="pystac-v">-90</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">2</span>
+            <span class="pystac-v">180</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">3</span>
+            <span class="pystac-v">90</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">temporal</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">interval</span><span class="pystac-l">[] 1 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">0</span><span class="pystac-l">[] 2 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"2017-01-01T00:00:00Z"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">1</span>
+            <span class="pystac-v">"2020-12-31T23:59:59Z"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+                
+            
+                
+                    
+        <li class="pystac-row">
+            <span class="pystac-k">license</span>
+            <span class="pystac-v">"CC-BY-4.0"</span>
+        </li>
+    
+                
+            
+                
+                    <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">keywords</span><span class="pystac-l">[] 2 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"Global"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">1</span>
+            <span class="pystac-v">"Biodiversity"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+                
+            
+                
+                    <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">providers</span><span class="pystac-l">[] 3 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">0</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">name</span>
+            <span class="pystac-v">"Impact Observatory"</span>
+        </li>
+    
+            
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">roles</span><span class="pystac-l">[] 3 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"processor"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">1</span>
+            <span class="pystac-v">"producer"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">2</span>
+            <span class="pystac-v">"licensor"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">url</span>
+            <span class="pystac-v">"https://www.impactobservatory.com/"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">1</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">name</span>
+            <span class="pystac-v">"Vizzuality"</span>
+        </li>
+    
+            
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">roles</span><span class="pystac-l">[] 1 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"processor"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">url</span>
+            <span class="pystac-v">"https://www.vizzuality.com/"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">2</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">name</span>
+            <span class="pystac-v">"Microsoft"</span>
+        </li>
+    
+            
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">roles</span><span class="pystac-l">[] 1 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"host"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">url</span>
+            <span class="pystac-v">"https://planetarycomputer.microsoft.com"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+                
+            
+                
+                    
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">summaries</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">version</span><span class="pystac-l">[] 1 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"v1"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+    </ul>
+        </details></li>
+    
+                
+            
+                
+                    
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">assets</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">thumbnail</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/io-biodiversity-thumb.png"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"Biodiversity Intactness"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">media_type</span>
+            <span class="pystac-v">"image/png"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">geoparquet-items</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">href</span>
+            <span class="pystac-v">"abfs://items/io-biodiversity.parquet"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">type</span>
+            <span class="pystac-v">"application/x-parquet"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">title</span>
+            <span class="pystac-v">"GeoParquet STAC items"</span>
+        </li>
+    
+            
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">description</span>
+            <span class="pystac-v">"Snapshot of the collection's STAC items exported to GeoParquet format."</span>
+        </li>
+    
+            
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">msft:partition_info</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">is_partitioned</span>
+            <span class="pystac-v">False</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+            
+                
+        <li><details>
+            <summary class="pystac-summary"><span class="pystac-k">table:storage_options</span></summary>
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">account_name</span>
+            <span class="pystac-v">"pcstacitems"</span>
+        </li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+            
+                <li><details>
+        <summary class="pystac-summary"><span class="pystac-k">roles</span><span class="pystac-l">[] 1 items</span></summary>
+        
+            <ul style="margin: 0px; padding: 0px 0px 0px 1.75em; list-style: none; display: block;">
+        
+            
+                
+        <li class="pystac-row">
+            <span class="pystac-k">0</span>
+            <span class="pystac-v">"stac-items"</span>
+        </li>
+    
+            
+        
+    </ul>
+        
+    </details></li>
+            
+        
+    </ul>
+        </details></li>
+    
+            
+        
+    </ul>
+        </details></li>
+    
+                
+            
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+<p>Now that we have our data, we need to specify the temporal and spatial information we are interested in. I will create a bounding box, that specifies our spatial area of interest.</p>
+<p>As we can see from the description of the Impact Observatory Collection above, the only dates represented in the data are our time range of interest (2017-2020). As such, there is no need to specify a temporal variable.</p>
+<div id="0088e464-d703-4854-9fcc-b26591de8b89" class="cell" data-tags="[]" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create bounding box</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>bbox_of_interest <span class="op">=</span> [<span class="op">-</span><span class="fl">112.826843</span>, <span class="fl">32.974108</span>, <span class="op">-</span><span class="fl">111.184387</span>, <span class="fl">33.863574</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2a9bccfa-8ac4-49a8-9cff-93e080398750" class="cell" data-tags="[]" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Catalog search</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>search <span class="op">=</span> catalog.search(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    collections <span class="op">=</span> [<span class="st">'io-biodiversity'</span>],</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    bbox <span class="op">=</span> bbox_of_interest)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Get items from search</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> search.item_collection()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine number of items in search</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'There are </span><span class="sc">{</span><span class="bu">len</span>(items)<span class="sc">}</span><span class="ss"> items in the search.'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>There are 4 items in the search.</code></pre>
+</div>
+</div>
+<div id="9856a117-e823-4bbf-be6d-6503a80827d7" class="cell" data-tags="[]" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve items</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>item_names <span class="op">=</span> {item.<span class="bu">id</span> : item <span class="cf">for</span> item <span class="kw">in</span> search.items()}</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(item_names) <span class="co"># from this list, we can see that our 1st item is 2020 data, and our 4th item is 2017 data</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select 2017 subset</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>phx_2017 <span class="op">=</span> items[<span class="dv">3</span>]</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Select 2020 subset</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>phx_2020 <span class="op">=</span> items[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Our search returned four STAC Items. We can tell from their IDs that that they contain data for the same area but for different times, specifically the years 2017 through 2020. Let’s display the available assets and properties for the 2017 Item.</p>
+<div id="727e3085-0358-4632-8d94-ec47b9decdf5" class="cell" data-tags="[]" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>asset_table <span class="op">=</span> rich.table.Table(<span class="st">"Asset Key"</span>, <span class="st">"Asset Title"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> items[<span class="op">-</span><span class="dv">1</span>].assets.items():</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    asset_table.add_row(key, value.title)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>asset_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> Asset Key        </span>┃<span style="font-weight: bold"> Asset Title                     </span>┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ data             │ Biodiversity Intactness         │
+│ tilejson         │ TileJSON with default rendering │
+│ rendered_preview │ Rendered preview                │
+└──────────────────┴─────────────────────────────────┘
+</pre>
+</div>
+</div>
+<div id="6e272eee-ade5-4489-b9a5-7b1f6dea2d2a" class="cell" data-tags="[]" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>property_table <span class="op">=</span> rich.table.Table(<span class="st">"Property Name"</span>, <span class="st">"Property Value"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> <span class="bu">sorted</span>(items[<span class="op">-</span><span class="dv">1</span>].properties.items()):</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    property_table.add_row(key, <span class="bu">str</span>(value))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>property_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> Property Name  </span>┃<span style="font-weight: bold"> Property Value                                                                                 </span>┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ datetime       │ None                                                                                           │
+│ end_datetime   │ 2017-12-31T23:59:59Z                                                                           │
+│ proj:epsg      │ 4326                                                                                           │
+│ proj:shape     │ [7992, 7992]                                                                                   │
+│ proj:transform │ [0.0008983152841195215, 0.0, -115.38597824385106, 0.0, -0.0008983152841195215,                 │
+│                │ 34.74464974521749, 0.0, 0.0, 1.0]                                                              │
+│ start_datetime │ 2017-01-01T00:00:00Z                                                                           │
+└────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────┘
+</pre>
+</div>
+</div>
+<section id="lets-look-at-a-raster." class="level4">
+<h4 class="anchored" data-anchor-id="lets-look-at-a-raster.">Let’s look at a raster.</h4>
+<p>We can see from the tables, that the Planetary Computer includes a “Rendered Preview”. Let’s take a look at the 2017 data:</p>
+<div id="21c62da7-e683-43e8-87f4-a18baeab3252" class="cell" data-tags="[]" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot rendered preview</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Image(url<span class="op">=</span>phx_2017.assets[<span class="st">'rendered_preview'</span>].href, width<span class="op">=</span><span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<img src="https://planetarycomputer.microsoft.com/api/data/v1/item/preview.png?collection=io-biodiversity&amp;item=bii_2017_34.74464974521749_-115.38597824385106_cog&amp;assets=data&amp;tile_format=png&amp;colormap_name=io-bii&amp;rescale=0%2C1&amp;expression=0.97%2A%28data_b1%2A%2A3.84%29&amp;format=png" width="500">
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="visualization-map-of-phoenix-county-az" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-map-of-phoenix-county-az">Visualization: Map of Phoenix County AZ</h2>
+<p>In order to better visualize the Phoenix area, I will make a map, and add in a basemap using the Contextily package. This map will give us a good visual of the greater Phoenix area, and will better help us understand our biodiveristy analysis later.</p>
+<div id="1f38e44f-c14f-4740-97af-907deb7a9c76" class="cell" data-tags="[]" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the figure</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the axis with plot</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>phoenix_merc <span class="op">=</span> phoenix.to_crs(epsg<span class="op">=</span><span class="dv">3857</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>phoenix_merc.plot(ax<span class="op">=</span>ax, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">10</span>), alpha<span class="op">=</span><span class="fl">0.45</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>, label<span class="op">=</span><span class="st">"Phoenix Boundary"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add NatGeo basemap from contextily</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>ctx.add_basemap(ax<span class="op">=</span>ax, source<span class="op">=</span>ctx.providers.Esri.NatGeoWorldMap)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>legend_elements <span class="op">=</span> [Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], color<span class="op">=</span><span class="st">'k'</span>, alpha<span class="op">=</span><span class="fl">0.45</span>, lw<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Phoenix County Boundary'</span>)]</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>ax.legend(handles<span class="op">=</span>legend_elements, loc<span class="op">=</span><span class="st">"upper left"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Update axes</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Phoenix County, Arizona"</span>, fontdict<span class="op">=</span>{<span class="st">"fontsize"</span>: <span class="dv">20</span>})</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BII_analysis (1)_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="biodiversity-intactness-index" class="level2">
+<h2 class="anchored" data-anchor-id="biodiversity-intactness-index">Biodiversity Intactness Index</h2>
+<p>Now that we have a good basemap, showing roads and ciites for context, we can work on also plotting our Plantary Computer data, to see biodiversity intactness in this highly urban area.</p>
+<p>Remembering the data tables created above, I know that I am interested the “data” asset, which should contain the information that I need to continue my comparative analysis. Since my analysis will involve directly comparing the years 2017 and 2020, I will create variables defining the assets of those years specifically.</p>
+<div id="915dfee8-5513-45a9-92cd-710f2f6aeb6f" class="cell" data-tags="[]" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve 2017 biodiversity data </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>phx_2017_asset <span class="op">=</span> phx_2017.assets[<span class="st">"data"</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>phx_2017_data <span class="op">=</span> rioxr.open_rasterio(phx_2017_asset.href)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve 2020 biodiversity data </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>phx_2020_asset <span class="op">=</span> phx_2020.assets[<span class="st">"data"</span>]</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>phx_2020_data <span class="op">=</span> rioxr.open_rasterio(phx_2020_asset.href)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>phx_2017_data</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>phx_2020_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+html[data-theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.DataArray (band: 1, y: 7992, x: 7992)&gt; Size: 255MB
+[63872064 values with dtype=float32]
+Coordinates:
+  * band         (band) int64 8B 1
+  * x            (x) float64 64kB -115.4 -115.4 -115.4 ... -108.2 -108.2 -108.2
+  * y            (y) float64 64kB 34.74 34.74 34.74 34.74 ... 27.57 27.57 27.57
+    spatial_ref  int64 8B 0
+Attributes:
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.DataArray</div><div class="xr-array-name"></div><ul class="xr-dim-list"><li><span class="xr-has-index">band</span>: 1</li><li><span class="xr-has-index">y</span>: 7992</li><li><span class="xr-has-index">x</span>: 7992</li></ul></div><ul class="xr-sections"><li class="xr-section-item"><div class="xr-array-wrap"><input id="section-4713a915-985a-4b23-b868-9010b1d170da" class="xr-array-in" type="checkbox" checked=""><label for="section-4713a915-985a-4b23-b868-9010b1d170da" title="Show/hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-array-preview xr-preview"><span>...</span></div><div class="xr-array-data"><pre>[63872064 values with dtype=float32]</pre></div></div></li><li class="xr-section-item"><input id="section-876a5b8b-f825-47df-8ec7-515978b702e2" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-876a5b8b-f825-47df-8ec7-515978b702e2" class="xr-section-summary">Coordinates: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">band</span></div><div class="xr-var-dims">(band)</div><div class="xr-var-dtype">int64</div><div class="xr-var-preview xr-preview">1</div><input id="attrs-7abcf718-d622-4156-9b3c-9251d10de63a" class="xr-var-attrs-in" type="checkbox" disabled=""><label for="attrs-7abcf718-d622-4156-9b3c-9251d10de63a" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-56935193-04eb-44be-a6e3-f0c5e2e1ce6c" class="xr-var-data-in" type="checkbox"><label for="data-56935193-04eb-44be-a6e3-f0c5e2e1ce6c" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([1])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">x</span></div><div class="xr-var-dims">(x)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">-115.4 -115.4 ... -108.2 -108.2</div><input id="attrs-80618da1-2522-44b0-96a7-93e77f99b354" class="xr-var-attrs-in" type="checkbox" disabled=""><label for="attrs-80618da1-2522-44b0-96a7-93e77f99b354" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-0ded11bb-39d4-4c0d-816a-2fab9120f717" class="xr-var-data-in" type="checkbox"><label for="data-0ded11bb-39d4-4c0d-816a-2fab9120f717" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([-115.385529, -115.384631, -115.383732, ..., -108.208888, -108.20799 ,
+       -108.207092])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">y</span></div><div class="xr-var-dims">(y)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">34.74 34.74 34.74 ... 27.57 27.57</div><input id="attrs-1319ce0a-2a11-4c6d-a038-6792a34282f7" class="xr-var-attrs-in" type="checkbox" disabled=""><label for="attrs-1319ce0a-2a11-4c6d-a038-6792a34282f7" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-6540f1b2-b4da-4f26-9b67-6aaaae271aac" class="xr-var-data-in" type="checkbox"><label for="data-6540f1b2-b4da-4f26-9b67-6aaaae271aac" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([34.744201, 34.743302, 34.742404, ..., 27.56756 , 27.566661, 27.565763])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>spatial_ref</span></div><div class="xr-var-dims">()</div><div class="xr-var-dtype">int64</div><div class="xr-var-preview xr-preview">0</div><input id="attrs-4c281ab1-6364-43df-af86-d369af55c310" class="xr-var-attrs-in" type="checkbox"><label for="attrs-4c281ab1-6364-43df-af86-d369af55c310" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-fe5fc30c-f521-46e6-8688-66154a6308bf" class="xr-var-data-in" type="checkbox"><label for="data-fe5fc30c-f521-46e6-8688-66154a6308bf" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>crs_wkt :</span></dt><dd>GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AXIS["Latitude",NORTH],AXIS["Longitude",EAST],AUTHORITY["EPSG","4326"]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AXIS["Latitude",NORTH],AXIS["Longitude",EAST],AUTHORITY["EPSG","4326"]]</dd><dt><span>GeoTransform :</span></dt><dd>-115.38597824385106 0.0008983152841195215 0.0 34.74464974521749 0.0 -0.0008983152841195215</dd></dl></div><div class="xr-var-data"><pre>array(0)</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-5f9ab289-cc4a-4873-9f74-cf94148dd19e" class="xr-section-summary-in" type="checkbox"><label for="section-5f9ab289-cc4a-4873-9f74-cf94148dd19e" class="xr-section-summary">Indexes: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>band</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-aa0177d7-88a9-4fb5-8791-72bdc7b3e016" class="xr-index-data-in" type="checkbox"><label for="index-aa0177d7-88a9-4fb5-8791-72bdc7b3e016" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([1], dtype='int64', name='band'))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>x</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-9d8d5d2c-fd90-457e-9a68-be63f7713b6d" class="xr-index-data-in" type="checkbox"><label for="index-9d8d5d2c-fd90-457e-9a68-be63f7713b6d" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-115.38552908620899, -115.38463077092487, -115.38373245564075,
+       -115.38283414035664, -115.38193582507252,  -115.3810375097884,
+       -115.38013919450427, -115.37924087922015, -115.37834256393603,
+       -115.37744424865191,
+       ...
+       -108.21517648836696, -108.21427817308285, -108.21337985779873,
+       -108.21248154251461, -108.21158322723049, -108.21068491194637,
+       -108.20978659666225, -108.20888828137814, -108.20798996609402,
+        -108.2070916508099],
+      dtype='float64', name='x', length=7992))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>y</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-d7b0f7fc-5d42-4f7e-b066-d37115fc90fd" class="xr-index-data-in" type="checkbox"><label for="index-d7b0f7fc-5d42-4f7e-b066-d37115fc90fd" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([ 34.74420058757543,  34.74330227229131,  34.74240395700719,
+       34.741505641723066,  34.74060732643895,  34.73970901115483,
+        34.73881069587071,  34.73791238058659, 34.737014065302475,
+        34.73611575001835,
+       ...
+        27.57384798973341, 27.572949674449287,  27.57205135916517,
+       27.571153043881047,  27.57025472859693,  27.56935641331281,
+        27.56845809802869,  27.56755978274457,  27.56666146746045,
+        27.56576315217633],
+      dtype='float64', name='y', length=7992))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-8921ac3e-862d-41a8-82af-2f7f55b1c840" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-8921ac3e-862d-41a8-82af-2f7f55b1c840" class="xr-section-summary">Attributes: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>scale_factor :</span></dt><dd>1.0</dd><dt><span>add_offset :</span></dt><dd>0.0</dd></dl></div></li></ul></div></div>
+</div>
+</div>
+<p>Since there is only 1 band, we can remove that dimension for a more easily managed dataset.</p>
+<div id="4302c884-a6c7-4aa9-ba7f-4fd233a33c3d" class="cell" data-tags="[]" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>phx_2017_data <span class="op">=</span> phx_2017_data.squeeze().drop_vars(<span class="st">'band'</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>phx_2020_data <span class="op">=</span> phx_2020_data.squeeze().drop_vars(<span class="st">'band'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, I need to clip the Planetary Computer data to match the Phoenix polygon I created earlier. I will make sure that my Coordinate Reference Systems match, before clipping and plotting.</p>
+<div id="9777d169-03e5-433b-b42a-f70323ceafac" class="cell" data-tags="[]" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Match CRSs</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>phoenix <span class="op">=</span> phoenix.to_crs(phx_2017_data.rio.crs)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assert check to ensure it worked</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> phoenix.crs <span class="op">==</span> phx_2017_data.rio.crs</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Clip 2017 BII raster to the Phoenix polygon</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>phx_clip_2017 <span class="op">=</span> phx_2017_data.rio.clip(phoenix[<span class="st">"geometry"</span>])</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># And again for 2020</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>phx_clip_2020 <span class="op">=</span>  phx_2020_data.rio.clip(phoenix[<span class="st">"geometry"</span>])</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's see how that looks for 2017</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>phx_clip_2017.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BII_analysis (1)_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-the-percentage-of-area-of-the-phoenix-subdivision-with-a-bii-of-at-least-0.75-in-2017-and-2020." class="level2">
+<h2 class="anchored" data-anchor-id="calculating-the-percentage-of-area-of-the-phoenix-subdivision-with-a-bii-of-at-least-0.75-in-2017-and-2020.">Calculating the percentage of area of the Phoenix subdivision with a BII of at least 0.75 in 2017 and 2020.</h2>
+<p>In order to do this calculation, I need to do a bit of “map algebra”.</p>
+<ol type="1">
+<li><p>I need to find the total number of pixels in the Phoenix subdivision polygon, for both years.</p></li>
+<li><p>Then, I need to find the numbers of pixels with the BII at 0.75 or higher, again for both years.</p></li>
+<li><p>Finally, I can use those pixel numbers I get to calculate the desired percentage.</p></li>
+</ol>
+<div id="3f761bad-7745-4c3f-9ab2-9459786d29e0" class="cell" data-tags="[]" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total area for 2017</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>total_2017 <span class="op">=</span> phx_clip_2017.count().item() </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total area for 2020</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>total_2020 <span class="op">=</span> phx_clip_2020.count().item()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate BII % for 2017, Make the data binary for easy math</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>phx_bii_2017 <span class="op">=</span> (phx_clip_2017 <span class="op">&gt;=</span> <span class="fl">0.75</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>pixels_2017 <span class="op">=</span> phx_bii_2017.<span class="bu">sum</span>().item()</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate BII % for 2020</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>phx_bii_2020 <span class="op">=</span> (phx_clip_2020 <span class="op">&gt;=</span> <span class="fl">0.75</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>pixels_2020 <span class="op">=</span> phx_bii_2020.<span class="bu">sum</span>().item()</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcualte the percentage area for 2017 data:</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>pct_bii_2017 <span class="op">=</span>  (pixels_2017 <span class="op">/</span> total_2017) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the percentage area for 2020 data:</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>pct_bii_2020 <span class="op">=</span> (pixels_2020 <span class="op">/</span> total_2020) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Print output</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>pct_text <span class="op">=</span> <span class="st">"The percentage of area in Phoenix County with a BII over 0.75 in"</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pct_text, <span class="st">"2017 is: "</span>, <span class="bu">round</span>(pct_bii_2017, <span class="dv">2</span>), <span class="st">"%"</span>)</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pct_text, <span class="st">"2020 is: "</span>, <span class="bu">round</span>(pct_bii_2020, <span class="dv">2</span>), <span class="st">"%"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The percentage of area in Phoenix County with a BII over 0.75 in 2017 is:  7.13 %
+The percentage of area in Phoenix County with a BII over 0.75 in 2020 is:  6.49 %</code></pre>
+</div>
+</div>
+</section>
+<section id="visualization-biodiversity-loss" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-biodiversity-loss">Visualization: Biodiversity Loss</h2>
+<p>Now that we have calculated the differences in biodiversity density between the two years, we can visualize this difference with a map.</p>
+<div id="73099990-734f-47e2-a65d-ef9372c6fd85" class="cell" data-tags="[]" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find areas where there was a loss in BII from 2017 to 2020</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>phx_bii_diff <span class="op">=</span> phx_bii_2017 <span class="op">-</span> phx_bii_2020</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a mask - like in 223!</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>phx_mask <span class="op">=</span> phx_bii_diff <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to int type</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>phx_mask <span class="op">=</span> phx_mask.astype(<span class="bu">int</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a color gradient</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>color_id <span class="op">=</span> [<span class="st">"none"</span>, <span class="st">"red"</span>]</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a color map object</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> plt.cm.colors.ListedColormap(color_id)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot!</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>phx_mask.plot(cmap <span class="op">=</span> cmap, add_colorbar <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BII_analysis (1)_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now that we have applied a color map visualization to our biodiversity loss, we can overlay this with our Planetary Computer raster, and our Phoenix subdivision polygon, to create a final visualization that shows us the area, in red, where Phoenix county experienced significant biodiversity losee.</p>
+</section>
+<section id="final-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="final-visualization">Final Visualization:</h2>
+<div id="f027cd5b-212e-4b9a-8688-971d24926471" class="cell" data-tags="[]" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize plot</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">7</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove axes</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin with clipped raster layer</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>phx_clip_2020.plot(ax <span class="op">=</span> ax,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                  cbar_kwargs <span class="op">=</span> {<span class="st">"location"</span>: <span class="st">"bottom"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"label"</span>: <span class="st">"BII in 2020"</span>})</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add mask layer</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>phx_mask.plot(ax <span class="op">=</span> ax,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>             cmap <span class="op">=</span> cmap,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>             add_colorbar <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>phx_mask_patch <span class="op">=</span> mpatches.Patch(color <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>                      label <span class="op">=</span> <span class="st">"Area with 75% Biodiversity Loss between 2017 and 2020"</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Add polygon layer</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>phoenix.plot(ax <span class="op">=</span> ax, </span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>            edgecolor <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co"># update legend, add in BII loss patch</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>ax.legend(handles <span class="op">=</span> [phx_mask_patch],</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>          frameon <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>          bbox_to_anchor <span class="op">=</span> (<span class="fl">0.85</span>, <span class="op">-</span><span class="fl">0.07</span>))</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Biodiversity Intactness Index (BII) and Biodiversity Loss in Phoenix, AZ"</span>)</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BII_analysis (1)_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Python and Jupyter Notebooks, as we can see, are powerful tools that allow us to conduct high level analyis with large amounts of spatial data.</p>
+<p>In this analysis, we can use these tools to visualize the sharp decrease in biodiversity in this area, perhaps due to urbanization and human impact. Such an analysis can be used to further understand the overall biodiversity crisis, and can help inform decision makers about the needs and priorities of conservation efforts.</p>
+</section>
+<section id="citations-and-data-access" class="level2">
+<h2 class="anchored" data-anchor-id="citations-and-data-access">Citations and Data Access:</h2>
+<p>C. Galaz García, EDS 220 - Working with Environmental Datasets, Course Notes. 2024. [Online]. Available: https://meds-eds-220.github.io/MEDS-eds-220-course/book/preface.html</p>
+<p>Microsoft Planetary Computer, STAC Catalog. Biodiversity Intactness (‘io-biodiversity’). [Dataset]. https://planetarycomputer.microsoft.com/dataset/io-biodiversity Accessed 2 December 2024.</p>
+<p>United States Census Bureau. (2022). Arizona County Subdivision 2022 TIGER/Line Shapefiles. [Data File]. U.S. Census Bureau, Geography Division. https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2022&amp;layergroup=County+Subdivisions Accessed 2 December 2024.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{jørgensen2024,
+  author = {Jørgensen, Bailey},
+  title = {Biodiversity {Intactness} {Index} {(BII)} Change in
+    {Phoenix,} {AZ}},
+  date = {2024-09-29},
+  url = {https://jorb1.github.io/posts/2024-09-19-BII/},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-jørgensen2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Jørgensen, Bailey. 2024. <span>“Biodiversity Intactness Index (BII)
+Change in Phoenix, AZ.”</span> September 29, 2024. <a href="https://jorb1.github.io/posts/2024-09-19-BII/">https://jorb1.github.io/posts/2024-09-19-BII/</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2024, Bailey Jørgensen</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This website is built with <i class="fa-solid fa-github" title="the octocat github logo" aria-label="github"></i></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
