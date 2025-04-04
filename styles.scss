@@ -86,6 +86,7 @@ nav .navbar-title {
   margin-bottom: 150px;
 }
 
+
 body {
   color: $color2; /* Use the white color variable you've defined */
   background-color: $color1; /* Ensure the background remains dark */
@@ -108,4 +109,27 @@ a:hover i {
   color: #8ffcff; /* Hover color for the icons */
 }
 
+
+/* Dropdown menu background and text color */
+.navbar .dropdown-menu {
+  background-color: $color1; /* Match the black background */
+  color: $color2;            /* Make the text white */
+}
+
+/* Ensure dropdown links are white when menu is active */
+.navbar .dropdown-menu a {
+  color: $color2; /* White text for links */
+}
+
+/* Add a hover effect for dropdown links */
+.navbar .dropdown-menu a:hover {
+  color: #8ffcff; /* Optional: lighter shade on hover */
+}
+
+/* Ensure active or focused menu items are styled */
+.navbar .dropdown-menu a:focus,
+.navbar .dropdown-menu a:active {
+  color: $color2; /* White text for active/focused links */
+  background-color: transparent; /* Optional: no background color on active */
+}
 

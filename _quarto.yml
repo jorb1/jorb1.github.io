@@ -14,12 +14,21 @@ website:
         text: PORTFOLIO
       - href: about.qmd
         text: About
-      - href: resources.qmd
-        text: Resources
+     # - href: resources.qmd
+     #   text: Resources
       - href: cv.qmd
         text: Resume
-      - href: contact.qmd
-        text: Contact
+     # - href: contact.qmd
+      - text: Contact
+        menu:
+          - text: LinkedIn
+            icon: linkedin
+            href: https://www.linkedin.com/in/bailey-jorgensen-a0a467271/
+            target: _blank
+          - text: Email
+            icon: envelope
+            href: mailto:bjorgensen@alfmuseum.org
+            target: _blank
 
   page-footer:
     background: dark
