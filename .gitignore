@@ -17,15 +17,15 @@
 #.quarto-cache/
 
 # Editor-specific files
-*.swp
-.vscode/
+# *.swp
+#.vscode/
 
 # System files
-.DS_Store
-Thumbs.db
+#.DS_Store
+#Thumbs.db
 
 # Logs
-*.log
+#*.log
 
 # Data folder in root directory
 data/

@@ -1,17 +1,14 @@
 ---
-title: "Blog Post Title"
-description: "a short catchy description of the blog post"
+title: "Underwater Paleontology, Robotics, and Education"
+description: "A reflection on the early days of a novel data collection technique"
 author: 
   - name: Bailey Jørgensen
-    url: https://jorb1.github.io/
-    orchid: 0009-0009-0970-5318
-    affiliation: MEDS
-    affiliation-url: https://bren.ucsb.edu
-date: 2024-09-18
-categories: [EDS, Robots, Boats, Paleontology]
+    url: https://orcid.org/my-orcid?orcid=0009-0009-0970-5318
+date: 2025-04-05
+categories: [Robots, Paleontology]
 toc: true
 bibliography: references.bib
-image: PXL_20240306_013220581.jpg
+image: rover2.jpg
 citation:
   url: https://jorb1.github.io/posts/2024-10-18-my-first-post/
 
@@ -48,9 +45,4 @@ ggplot(penguins,
 
 ```
 
-```{r}
-#| echo: false
-#| fig-align: "center"
-knitr::include_graphics("PXL_20240306_013220581.jpg")
-```
 
