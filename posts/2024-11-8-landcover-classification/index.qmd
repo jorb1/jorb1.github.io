@@ -20,7 +20,7 @@ citation:
 
 ```{r, fig.align='center'}
 #| echo: false
-knitr::include_graphics("tree.jpg")
+knitr::include_graphics(here::here("posts","2024-11-8-landcover-classification","tree.jpg"))
 ```
 
 ## Background
