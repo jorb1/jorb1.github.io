@@ -1,0 +1,304 @@
+---
+title: "An R Analysis of Landcover Classification using Decision Trees"
+description: "Using multi-spectral imagery on the location of 4 land cover types, with a machine learning twist"
+author: "Bailey Jørgensen"
+date: 2024-11-8
+categories: [EDS, Geospatial, Machine Learning]
+image: tree.jpg
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+citation:
+  url: https://jorb1.github.io/posts/2024-11-8-landcover-classification/
+---
+
+```{r, fig.align='center'}
+#| echo: false
+knitr::include_graphics("tree.jpg")
+```
+
+## Background
+
+Monitoring the distribution and change in land cover types can help us understand the impacts of phenomena like climate change, natural disasters, deforestation, and urbanization. Determining land cover types over large areas is a major application of remote sensing because we are able to distinguish different materials based on their spectral reflectance.
+
+Classifying remotely sensed imagery into land cover classes enables us to understand the distribution and change in land cover types over large areas.
+
+There are many approaches for performing land cover classification:
+
+- **Supervised** approaches use training data labeled by the user
+- **Unsupervised** approaches use algorithms to create groups which are identified by the user afterward
+
+## Game Plan
+
+In this exercise, I am using a form of supervised classification – a decision tree classifier.
+
+*Decision trees* classify pixels using a series of conditions based on values in spectral bands. These conditions (or decisions) are developed based on training data.
+
+I will create a land cover classification for southern Santa Barbara County based on multi-spectral imagery and data on the location of 4 land cover types:
+
+- green vegetation
+- dry grass or soil
+- urban
+- water
+
+To do so, I will need to:
+
+- Load and process Landsat scene
+- Crop and mask Landsat data to study area
+- Extract spectral data at training sites
+- Train and apply decision tree classifier
+- Plot results
+
+## Data Details
+
+To conduct this analysis, I will use the Landsat 5 Thematic Mapper data. More information about these data can be found at this link: https://www.usgs.gov/landsat-missions/landsat-5. 
+
+Specifically, I will be using 1 scene from September 25, 2007 (my birthday!), on bands 1,2, 3, 4, 5, 7, with collection 2 surface reflectance product. 
+
+*Data files:*
+
+- landsat-data/LT05_L2SP_042036_20070925_20200829_02_T1_SR_B1.tif
+- landsat-data/LT05_L2SP_042036_20070925_20200829_02_T1_SR_B2.tif
+- landsat-data/LT05_L2SP_042036_20070925_20200829_02_T1_SR_B3.tif
+- landsat-data/LT05_L2SP_042036_20070925_20200829_02_T1_SR_B4.tif
+- landsat-data/LT05_L2SP_042036_20070925_20200829_02_T1_SR_B5.tif
+- landsat-data/LT05_L2SP_042036_20070925_20200829_02_T1_SR_B7.tif
+
+**Study area:**
+
+I will be using a polygon representing southern Santa Barbara county, the county in which I am currently attending school. 
+
+*Data file:*
+
+- SB_county_south.shp
+
+**Training data:**
+
+And finally, I will be using a data file with polygons representing sites with training data. Specifically, I will be using the data character string with land cover type.
+
+*Data file:* 
+
+- trainingdata.shp
+
+All of the data used in this study were accessed on November 25th, 2024.
+
+## Workflow
+
+### 1. Set up
+
+To train our classification algorithm and plot the results, I will use the rpart and rpart.plot packages.
+
+
+```{r}
+# install.packages("rpart")
+# install.packages("rpart.plot")
+```
+
+Let’s load all necessary packages:
+
+```{r}
+#| eval: true
+#| echo: false
+library(sf) # vector data
+library(terra) # raster data
+library(here) # file path management
+library(tidyverse)
+library(rpart) # recursive partitioning and regression trees
+library(rpart.plot) # plotting for rpart
+library(tmap) # map making
+```
+
+### 2. Load Landsat data
+
+Let’s create a raster stack. Each file name ends with the band number (e.g. B1.tif).
+
+*I am missing a file for band 6, but, this is intentional. Band 6 corresponds to thermal data, which I will not be working with during this exercise.*
+
+To create a raster stack, I will create a list of the files that I would like to work with and read them all in at once using the terra::rast() function. I will then update the names of the layers to match the spectral bands and plot a true color image to see what we’re working with.
+
+```{r}
+# list files for each band, including the full file path
+filelist <- list.files(here::here("posts", "2024-11-8-landcover-classification", "data", "landsat-data"), full.names = TRUE)
+
+# read in and store as a raster stack
+landsat <- rast(filelist)
+
+# update layer names to match band
+names(landsat) <- c("blue", "green", "red", "NIR", "SWIR1", "SWIR2")
+
+# plot true color image
+plotRGB(landsat, r = 3, g = 2, b = 1, stretch = "lin")
+```
+
+### 3. Load study area
+
+I want to constrain our analysis to the southern portion of the county where we have training data, so I’ll read in a file that defines the area I would like to study.
+
+```{r}
+# read in shapefile for southern portion of SB county
+SB_county_south <- st_read(here::here("posts", "2024-11-8-landcover-classification", "data", "SB_county_south.shp")) %>%
+      st_transform(SB_county_south, crs = crs(landsat))
+
+# Plot the shapefile
+tm_shape(SB_county_south) +
+  tm_borders()
+```
+
+### 4. Crop and mask Landsat data to study area
+
+Now, I can crop and mask the Landsat data to the study area.
+
+- **Why?** This reduces the amount of data we’ll be working with and therefore saves computational time
+- **Bonus:** We can also remove any objects we’re no longer working with to save space
+
+```{r}
+# crop Landsat scene to the extent of the SB county shapefile
+landsat_cropped <- crop(landsat, SB_county_south)
+
+# mask the raster to southern portion of SB county
+landsat_masked <- mask(landsat_cropped, SB_county_south)
+
+# remove unnecessary object from environment
+rm(landsat, SB_county_south, landsat_cropped)
+
+# Plot!
+plotRGB(landsat_masked, r = 3, g = 2, b = 1, stretch = "lin")
+```
+
+### 5. Convert Landsat values to reflectance
+
+Now I need to convert the values in our raster stack to correspond to reflectance values. To do so, we need to remove erroneous values and apply any scaling factors to convert to reflectance.
+
+In this case, I are working with Landsat Collection 2.
+
+The valid range of pixel values for this collection goes from 7,273 to 43,636…
+- with a multiplicative scale factor of 0.0000275
+- with an additive scale factor of -0.2
+
+Let’s reclassify any erroneous values as NA and update the values for each pixel based on the scaling factors. Now the pixel values should range from 0-100%!
+
+```{r}
+# reclassify erroneous values as NA
+rcl <- matrix(c(-Inf, 7273, NA,
+                 43636, Inf, NA), ncol = 3, byrow = TRUE)
+
+landsat <- classify(landsat_masked, rcl = rcl)
+
+# adjust values based on scaling factor
+landsat <- (landsat * 0.0000275 - 0.2) * 100
+
+# check values are 0 - 100
+summary(landsat)
+```
+
+### 6. Training classifier
+
+Let’s begin by extracting reflectance values for training data!
+
+We will load the shapefile identifying locations within our study area as containing one of our 4 land cover types.
+
+```{r}
+# read in and transform training data
+training_data <- st_read(here::here( "posts", "2024-11-8-landcover-classification", "data", "trainingdata.shp")) %>%
+  st_transform(., crs = crs(landsat))
+```
+
+Now, we can extract the spectral reflectance values at each site to create a data frame that relates land cover types to their spectral reflectance.
+
+```{r}
+# extract reflectance values at training sites
+training_data_values <- terra::extract(landsat, training_data, df = TRUE)
+
+# convert training data to data frame
+training_data_attributes <- training_data %>%
+  st_drop_geometry()
+
+# join training data attributes and extracted reflectance values
+SB_training_data <- left_join(training_data_values, training_data_attributes,
+                              by = c("ID" = "id")) %>%
+                    mutate(type = as.factor(type)) # convert landcover type to factor
+```
+
+Next, let’s train the decision tree classifier!
+
+To train our decision tree, we first need to establish our model formula (i.e. what our response and predictor variables are).
+
+- The rpart() function implements the CART algorithm
+- The rpart() function needs to know the model formula and training data you would like to use
+- Because we are performing a classification, we set method = "class"
+- We also set na.action = na.omit to remove any pixels with NAs from the analysis.
+
+```{r}
+# Establish model formula
+SB_formula <- type ~ red + green + blue + NIR + SWIR1 + SWIR2
+
+# Train decision tree
+SB_decision_tree <- rpart(formula = SB_formula,
+                          data = SB_training_data, 
+                          method = "class",
+                          na.action = na.omit)
+```
+
+To understand how the decision tree will classify pixels, I can plot the results!
+
+```{r}
+# plot decision tree
+prp(SB_decision_tree)
+```
+
+
+### 7. Classify image
+
+Now that I have a rule set for classifying spectral reflectance values into landcover types, I can apply the classifier to identify the landcover type in each pixel.
+
+The terra package includes a predict() function that allows us to apply a model to our data. In order for this to work properly, the names of the layers need to match the column names of the predictors we used to train our decision tree. The predict() function will return a raster layer with integer values. These integer values correspond to the factor levels in the training data. To figure out what category each integer corresponds to, we can inspect the levels of our training data.
+
+```{r}
+# classify image based on decision tree
+SB_classification <- terra::predict(landsat, SB_decision_tree, type = "class", na.rm = TRUE)
+
+# inspect level to understand the order of classes in prediction
+levels(SB_training_data$type)
+```
+
+### 8. Plot results
+
+Finally, I can plot the results and check out our land cover map!
+
+
+```{r}
+# Plot results
+tm_shape(SB_classification) + 
+  tm_raster(palette = c("#8DB580", "#F2DDA4", "grey", "cornflowerblue"),
+            labels = c("green vegetation",
+                       "soil/dead grass",
+                       "urban",
+                       "water"),
+            title = "Land cover type") +
+  tm_layout(legend.position = c("left", "bottom"),
+            main.title = "Santa Barbara Land Cover")
+  
+```
+
+## Conclusion:
+
+Working with Landsat data is fun! And it allows us to run analysis regarding landcover types, with the magic of R.
+
+## Acknowledements: 
+
+Material for this exercise was taken from Ruth Oliver's EDS 223: Geospatial Analysis Course at the University of Santa Barbara's Masters of Environmental Data Science program. Thank you, Ruth! 
+
+## Citations:
+
+R. Oliver, EDS 223 - Geospatial Analysis and Remote Sensing, Course Notes. 2024. [Online]. Available: https://eds-223-geospatial.github.io/
+
+U.S. Geological Survey. (n.d.). Landsat 5. Retrieved December 7, 2024, from https://www.usgs.gov/landsat-missions/landsat-5
+
+
+

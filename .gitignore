@@ -26,3 +26,10 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Data folder in root directory
+data/
+
+# Data in posts data folders
+posts/2024-11-8-landcover-classification/data
+posts/2024-12-12-coral-interactions/data

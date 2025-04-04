@@ -3,16 +3,18 @@
     "listing": "/index.html",
     "items": [
       "/posts/2024-12-12-coral-interactions/index.html",
-      "/posts/2024-10-18-my-first-post/index.html",
-      "/posts/2024-12-4-thomas-fire-post/thomas_fire_analysis (1).html"
+      "/posts/2024-11-8-landcover-classification/index.html",
+      "/posts/2024-12-4-thomas-fire-post/thomas_fire_analysis (1).html",
+      "/posts/2024-10-18-my-first-post/index.html"
     ]
   },
   {
     "listing": "/posts.html",
     "items": [
       "/posts/2024-12-12-coral-interactions/index.html",
-      "/posts/2024-10-18-my-first-post/index.html",
-      "/posts/2024-12-4-thomas-fire-post/thomas_fire_analysis (1).html"
+      "/posts/2024-11-8-landcover-classification/index.html",
+      "/posts/2024-12-4-thomas-fire-post/thomas_fire_analysis (1).html",
+      "/posts/2024-10-18-my-first-post/index.html"
     ]
   }
 ]
