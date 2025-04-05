@@ -168,7 +168,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
       <h1 class="title">Prioritizing Potential Aquaculture Zones on the West Coast of the United States</h1>
-            <p class="subtitle lead">An Exercise in R and Quarto</p>
                   <div>
         <div class="description">
           An Exercise in R and Quarto
@@ -256,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed 🥳</code></pre>
+<pre><code>Test passed 🥇</code></pre>
 </div>
 </div>
 </section>
@@ -314,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      (<span class="fu">res</span>(bathymetry_resampled)[<span class="dv">2</span>] <span class="sc">==</span> <span class="fu">res</span>(sst_average_celsius)[<span class="dv">2</span>])</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p>Test passed 🥳</p>
+<p>Test passed 🌈</p>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crop the bathymetry raster at last</span></span>
@@ -327,21 +326,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_true</span>(<span class="fu">all</span>(<span class="fu">res</span>(bathymetry_cropped) <span class="sc">==</span> <span class="fu">res</span>(sst_average_celsius)))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p>Test passed 🥳</p>
+<p>Test passed 🌈</p>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"The rasters have the same extent"</span>, {</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_true</span>(<span class="fu">ext</span>(bathymetry_cropped) <span class="sc">==</span> <span class="fu">ext</span>(sst_average_celsius))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p>Test passed 😀</p>
+<p>Test passed 🥇</p>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"The rasters have the same CRS"</span>, {</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_true</span>(<span class="fu">crs</span>(bathymetry_cropped) <span class="sc">==</span> <span class="fu">crs</span>(sst_average_celsius))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p>Test passed 😀</p>
+<p>Test passed 🎊</p>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, lets do it! Stack that raster!</span></span>
@@ -426,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">"Region Name"</span>) <span class="sc">+</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">"West Coast EEZs"</span>,</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.position =</span> <span class="st">"center"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.55</span>, <span class="fl">0.60</span>)) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(us_states) <span class="sc">+</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> .<span class="dv">20</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -462,9 +461,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">labels =</span> <span class="st">" "</span>) <span class="sc">+</span></span>
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>     <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">"EEZs with Optimal</span><span class="sc">\n</span><span class="st">Oyster Habitat"</span>,</span>
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">main.title.position =</span> <span class="st">"center"</span>,</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.55</span>, <span class="fl">0.50</span>))</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(final_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">legend.outside =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(final_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -514,26 +512,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>final_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="ttijhxtlio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bogvfobjkc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ttijhxtlio table {
+#bogvfobjkc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ttijhxtlio thead, #ttijhxtlio tbody, #ttijhxtlio tfoot, #ttijhxtlio tr, #ttijhxtlio td, #ttijhxtlio th {
+#bogvfobjkc thead, #bogvfobjkc tbody, #bogvfobjkc tfoot, #bogvfobjkc tr, #bogvfobjkc td, #bogvfobjkc th {
   border-style: none;
 }
 
-#ttijhxtlio p {
+#bogvfobjkc p {
   margin: 0;
   padding: 0;
 }
 
-#ttijhxtlio .gt_table {
+#bogvfobjkc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -559,12 +557,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_caption {
+#bogvfobjkc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ttijhxtlio .gt_title {
+#bogvfobjkc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -576,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ttijhxtlio .gt_subtitle {
+#bogvfobjkc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -588,7 +586,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ttijhxtlio .gt_heading {
+#bogvfobjkc .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -600,13 +598,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_bottom_border {
+#bogvfobjkc .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_col_headings {
+#bogvfobjkc .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -621,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_col_heading {
+#bogvfobjkc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -641,7 +639,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ttijhxtlio .gt_column_spanner_outer {
+#bogvfobjkc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -653,15 +651,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ttijhxtlio .gt_column_spanner_outer:first-child {
+#bogvfobjkc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ttijhxtlio .gt_column_spanner_outer:last-child {
+#bogvfobjkc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ttijhxtlio .gt_column_spanner {
+#bogvfobjkc .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #334422;
@@ -673,11 +671,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ttijhxtlio .gt_spanner_row {
+#bogvfobjkc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ttijhxtlio .gt_group_heading {
+#bogvfobjkc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -703,7 +701,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ttijhxtlio .gt_empty_group_heading {
+#bogvfobjkc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -718,15 +716,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ttijhxtlio .gt_from_md > :first-child {
+#bogvfobjkc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ttijhxtlio .gt_from_md > :last-child {
+#bogvfobjkc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ttijhxtlio .gt_row {
+#bogvfobjkc .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -745,7 +743,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ttijhxtlio .gt_stub {
+#bogvfobjkc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -758,7 +756,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ttijhxtlio .gt_stub_row_group {
+#bogvfobjkc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -772,15 +770,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ttijhxtlio .gt_row_group_first td {
+#bogvfobjkc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ttijhxtlio .gt_row_group_first th {
+#bogvfobjkc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ttijhxtlio .gt_summary_row {
+#bogvfobjkc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -790,16 +788,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ttijhxtlio .gt_first_summary_row {
+#bogvfobjkc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_first_summary_row.thick {
+#bogvfobjkc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ttijhxtlio .gt_last_summary_row {
+#bogvfobjkc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -809,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_grand_summary_row {
+#bogvfobjkc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -819,7 +817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ttijhxtlio .gt_first_grand_summary_row {
+#bogvfobjkc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -829,7 +827,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_last_grand_summary_row_top {
+#bogvfobjkc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -839,11 +837,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_striped {
+#bogvfobjkc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ttijhxtlio .gt_table_body {
+#bogvfobjkc .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -852,7 +850,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #FFFFFF;
 }
 
-#ttijhxtlio .gt_footnotes {
+#bogvfobjkc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -866,7 +864,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_footnote {
+#bogvfobjkc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -875,7 +873,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ttijhxtlio .gt_sourcenotes {
+#bogvfobjkc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -889,7 +887,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ttijhxtlio .gt_sourcenote {
+#bogvfobjkc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -897,72 +895,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ttijhxtlio .gt_left {
+#bogvfobjkc .gt_left {
   text-align: left;
 }
 
-#ttijhxtlio .gt_center {
+#bogvfobjkc .gt_center {
   text-align: center;
 }
 
-#ttijhxtlio .gt_right {
+#bogvfobjkc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ttijhxtlio .gt_font_normal {
+#bogvfobjkc .gt_font_normal {
   font-weight: normal;
 }
 
-#ttijhxtlio .gt_font_bold {
+#bogvfobjkc .gt_font_bold {
   font-weight: bold;
 }
 
-#ttijhxtlio .gt_font_italic {
+#bogvfobjkc .gt_font_italic {
   font-style: italic;
 }
 
-#ttijhxtlio .gt_super {
+#bogvfobjkc .gt_super {
   font-size: 65%;
 }
 
-#ttijhxtlio .gt_footnote_marks {
+#bogvfobjkc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ttijhxtlio .gt_asterisk {
+#bogvfobjkc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ttijhxtlio .gt_indent_1 {
+#bogvfobjkc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ttijhxtlio .gt_indent_2 {
+#bogvfobjkc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ttijhxtlio .gt_indent_3 {
+#bogvfobjkc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ttijhxtlio .gt_indent_4 {
+#bogvfobjkc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ttijhxtlio .gt_indent_5 {
+#bogvfobjkc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ttijhxtlio .katex-display {
+#bogvfobjkc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ttijhxtlio div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bogvfobjkc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1104,7 +1102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="fu">paste</span>(<span class="st">"EEZs with Optimal</span><span class="sc">\n</span><span class="st">"</span>, species, <span class="st">"</span><span class="sc">\n</span><span class="st">Habitat"</span>),</span>
 <span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>                <span class="at">main.title.size =</span> .<span class="dv">90</span>,</span>
 <span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>                <span class="at">main.title.position =</span> <span class="st">"center"</span>,</span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>                <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.55</span>, <span class="fl">0.50</span>))</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>                <span class="at">legend.outside =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(final_map)</span>
 <span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rasterize the EEZ dataframe using the 'rgn' column</span></span>
@@ -1152,9 +1150,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">optimal_aquaculture</span>(<span class="at">sst_data =</span> sst_stack, <span class="at">bathy_data =</span> bathymetry, <span class="at">eez_data =</span> maritime_boundaries, <span class="at">species =</span> <span class="st">"White Shrimp"</span>, <span class="at">min_temp =</span> <span class="fl">15.3</span>, <span class="at">max_temp =</span> <span class="fl">27.3</span>, <span class="at">min_depth =</span> <span class="dv">0</span>, <span class="at">max_depth =</span> <span class="sc">-</span><span class="dv">119</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed 😀
+<pre><code>Test passed 🎉
 Test passed 🥳
-Test passed 🎉
+Test passed 😀
 Test passed 🥳
 Test passed 🥇</code></pre>
 </div>
@@ -1166,26 +1164,26 @@ Test passed 🥇</code></pre>
 </div>
 </div>
 <div class="cell-output-display">
-<div id="fxwktghntt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xovxpylews" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fxwktghntt table {
+#xovxpylews table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fxwktghntt thead, #fxwktghntt tbody, #fxwktghntt tfoot, #fxwktghntt tr, #fxwktghntt td, #fxwktghntt th {
+#xovxpylews thead, #xovxpylews tbody, #xovxpylews tfoot, #xovxpylews tr, #xovxpylews td, #xovxpylews th {
   border-style: none;
 }
 
-#fxwktghntt p {
+#xovxpylews p {
   margin: 0;
   padding: 0;
 }
 
-#fxwktghntt .gt_table {
+#xovxpylews .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1211,12 +1209,12 @@ Test passed 🥇</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_caption {
+#xovxpylews .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fxwktghntt .gt_title {
+#xovxpylews .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1228,7 +1226,7 @@ Test passed 🥇</code></pre>
   border-bottom-width: 0;
 }
 
-#fxwktghntt .gt_subtitle {
+#xovxpylews .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1240,7 +1238,7 @@ Test passed 🥇</code></pre>
   border-top-width: 0;
 }
 
-#fxwktghntt .gt_heading {
+#xovxpylews .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1252,13 +1250,13 @@ Test passed 🥇</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_bottom_border {
+#xovxpylews .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_col_headings {
+#xovxpylews .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1273,7 +1271,7 @@ Test passed 🥇</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_col_heading {
+#xovxpylews .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -1293,7 +1291,7 @@ Test passed 🥇</code></pre>
   overflow-x: hidden;
 }
 
-#fxwktghntt .gt_column_spanner_outer {
+#xovxpylews .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -1305,15 +1303,15 @@ Test passed 🥇</code></pre>
   padding-right: 4px;
 }
 
-#fxwktghntt .gt_column_spanner_outer:first-child {
+#xovxpylews .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fxwktghntt .gt_column_spanner_outer:last-child {
+#xovxpylews .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fxwktghntt .gt_column_spanner {
+#xovxpylews .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #334422;
@@ -1325,11 +1323,11 @@ Test passed 🥇</code></pre>
   width: 100%;
 }
 
-#fxwktghntt .gt_spanner_row {
+#xovxpylews .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fxwktghntt .gt_group_heading {
+#xovxpylews .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1355,7 +1353,7 @@ Test passed 🥇</code></pre>
   text-align: left;
 }
 
-#fxwktghntt .gt_empty_group_heading {
+#xovxpylews .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1370,15 +1368,15 @@ Test passed 🥇</code></pre>
   vertical-align: middle;
 }
 
-#fxwktghntt .gt_from_md > :first-child {
+#xovxpylews .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fxwktghntt .gt_from_md > :last-child {
+#xovxpylews .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fxwktghntt .gt_row {
+#xovxpylews .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -1397,7 +1395,7 @@ Test passed 🥇</code></pre>
   overflow-x: hidden;
 }
 
-#fxwktghntt .gt_stub {
+#xovxpylews .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1410,7 +1408,7 @@ Test passed 🥇</code></pre>
   padding-right: 5px;
 }
 
-#fxwktghntt .gt_stub_row_group {
+#xovxpylews .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1424,15 +1422,15 @@ Test passed 🥇</code></pre>
   vertical-align: top;
 }
 
-#fxwktghntt .gt_row_group_first td {
+#xovxpylews .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fxwktghntt .gt_row_group_first th {
+#xovxpylews .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fxwktghntt .gt_summary_row {
+#xovxpylews .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1442,16 +1440,16 @@ Test passed 🥇</code></pre>
   padding-right: 5px;
 }
 
-#fxwktghntt .gt_first_summary_row {
+#xovxpylews .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_first_summary_row.thick {
+#xovxpylews .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fxwktghntt .gt_last_summary_row {
+#xovxpylews .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1461,7 +1459,7 @@ Test passed 🥇</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_grand_summary_row {
+#xovxpylews .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1471,7 +1469,7 @@ Test passed 🥇</code></pre>
   padding-right: 5px;
 }
 
-#fxwktghntt .gt_first_grand_summary_row {
+#xovxpylews .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1481,7 +1479,7 @@ Test passed 🥇</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_last_grand_summary_row_top {
+#xovxpylews .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1491,11 +1489,11 @@ Test passed 🥇</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_striped {
+#xovxpylews .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fxwktghntt .gt_table_body {
+#xovxpylews .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1504,7 +1502,7 @@ Test passed 🥇</code></pre>
   border-bottom-color: #FFFFFF;
 }
 
-#fxwktghntt .gt_footnotes {
+#xovxpylews .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1518,7 +1516,7 @@ Test passed 🥇</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_footnote {
+#xovxpylews .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1527,7 +1525,7 @@ Test passed 🥇</code></pre>
   padding-right: 5px;
 }
 
-#fxwktghntt .gt_sourcenotes {
+#xovxpylews .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1541,7 +1539,7 @@ Test passed 🥇</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fxwktghntt .gt_sourcenote {
+#xovxpylews .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1549,72 +1547,72 @@ Test passed 🥇</code></pre>
   padding-right: 5px;
 }
 
-#fxwktghntt .gt_left {
+#xovxpylews .gt_left {
   text-align: left;
 }
 
-#fxwktghntt .gt_center {
+#xovxpylews .gt_center {
   text-align: center;
 }
 
-#fxwktghntt .gt_right {
+#xovxpylews .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fxwktghntt .gt_font_normal {
+#xovxpylews .gt_font_normal {
   font-weight: normal;
 }
 
-#fxwktghntt .gt_font_bold {
+#xovxpylews .gt_font_bold {
   font-weight: bold;
 }
 
-#fxwktghntt .gt_font_italic {
+#xovxpylews .gt_font_italic {
   font-style: italic;
 }
 
-#fxwktghntt .gt_super {
+#xovxpylews .gt_super {
   font-size: 65%;
 }
 
-#fxwktghntt .gt_footnote_marks {
+#xovxpylews .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fxwktghntt .gt_asterisk {
+#xovxpylews .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fxwktghntt .gt_indent_1 {
+#xovxpylews .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fxwktghntt .gt_indent_2 {
+#xovxpylews .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fxwktghntt .gt_indent_3 {
+#xovxpylews .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fxwktghntt .gt_indent_4 {
+#xovxpylews .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fxwktghntt .gt_indent_5 {
+#xovxpylews .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fxwktghntt .katex-display {
+#xovxpylews .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fxwktghntt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xovxpylews div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

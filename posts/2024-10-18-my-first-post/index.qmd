@@ -1,48 +1,30 @@
 ---
-title: "Underwater Paleontology, Robotics, and Education"
-description: "A reflection on the early days of a novel data collection technique"
+title: "New Records of Eocene and Oligocene Squamates from Southwest Montana"
+description: "A new paper published in Paludicola by the Rochester Institute of Vertebrate Paleontology"
 author: 
-  - name: Bailey Jørgensen
+  - name: Donald Lofgren, Debra Hanneman, Anthony Runkel, Ping Fong, Gabriel Hong, Josephine Burdekin, Michael Chai, Yvonne Kan, and Bailey Jørgensen
     url: https://orcid.org/my-orcid?orcid=0009-0009-0970-5318
-date: 2025-04-05
-categories: [Robots, Paleontology]
+date: 2024-09-05
+categories: [Paleontology]
 toc: true
-bibliography: references.bib
-image: rover2.jpg
+image: liz.png
 citation:
-  url: https://jorb1.github.io/posts/2024-10-18-my-first-post/
+  url: https://jorb1.github.io/posts/2024-09-05-my-first-post/
 
 
 ---
+## Published in [Paludicola 14(3):110-121](https://rivp-paludicola.org/home-page/)
+### Abstract:
 
-## This is my first section
+Recently recovered specimens from the Chadronian Pipestone Springs Main Pocket (PSMP), Whitneyan strata in the Gravelly Range, and Uintan rocks in the Sage Creek area significantly increase the diversity of squamates known from the Tertiary depositional basins of southwest Montana. At PSMP, most common are the glyptosaurine lizard Helodermoides tuberculatus which represents over 60% of dentigerous lizard elements and the boid snake Calamagras which is represented by forty-four vertebrae. Four varanid elements, a specimen tentatively referred to the glyptosaurine Peltosaurus, and Calamagras from PSMP are their first documented occurrences in the Tertiary depositional basins of southwest Montana, as is a miniscule dentary fragment that represents an iguanid smaller than Aciprion formosum. A skull of A. formosum from the Gravelly Range is the first record of the species from Montana and its first confirmed occurrence from Whitneyan strata. Fragmentary elements from the Uintan Dell beds in the Sage Creek depositional basin indicate the presence of a glyptosaurine and an indeterminate iguanid. These new records of Eocene and Oligocene squamates from Montana are important additions to the temporal and/or paleogeographic ranges of Calamagras, Aciprion formosum, varanids, and perhaps Peltosaurus.
 
-I'm going to insert a footnote here[^1]
+### Sneak peak of a figure inside:
 
-[^1]: Here is a new footnote
-
-## This is my second
-
-Here's my next paragraph[^2]
-
-[^2]: Here is my second footnote
-
-here is more random text. im going to cite a journal article now.[@gaynor2022]
-
-```{r}
-#| eval: true
+```{r, fig.align='center'}
 #| echo: false
-#| warning: false
-#| message: false
-
-library(palmerpenguins)
-library(tidyverse)
-
-ggplot(penguins,
-       aes(x = bill_length_mm,
-           y = bill_depth_mm)) +
-  geom_point()
-
+knitr::include_graphics(here::here("posts","2024-10-18-my-first-post","liz.png"))
 ```
+
+Smash that contact button if you want to learn more!
 
 

@@ -1,0 +1,34 @@
+---
+title: "Underwater Paleontology, Robotics, and Education"
+description: "A reflection on the early days of a novel data collection technique"
+author: 
+  - name: Bailey Jørgensen
+    url: https://orcid.org/my-orcid?orcid=0009-0009-0970-5318
+date: 2025-04-05
+categories: [Robots, Paleontology]
+toc: true
+bibliography: references.bib
+image: rover2.jpg
+citation:
+  url: https://jorb1.github.io/posts/2025-4-5-robot/
+---
+
+## Coming soon!
+### Full post in progress. 
+
+In the meantime, I'd like to thank the [Paleontological Society](https://www.paleosoc.org/) and the [Society of Vertebrate Paleontology](https://vertpaleo.org/) for the grant awards that got this project off the ground. 
+
+```{r, fig.align='center'}
+#| echo: false
+knitr::include_graphics(here::here("posts", "2025-4-5-robot", "kiddos.jpg"))
+```
+
+And a thank you to the [Webb Schools](https://www.webb.org/) for providing funding for our students first expedition! 
+
+```{r, fig.align='center'}
+#| echo: false
+knitr::include_graphics(here::here("posts", "2025-4-5-robot", "robo.png"))
+```
+
+The robot and students performed exceptionally! But, more details on that soon...stay tuned.
+

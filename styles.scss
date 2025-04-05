@@ -100,6 +100,10 @@ main {
   padding-top: 100px; /* Adds space before the post listing */
 }
 
+a {
+  color: #00f9ff; /* Replace with your desired default color */
+}
+
 a i {
   color: $color5; /* Default icon color (use your desired color variable) */
   transition: color 0.3s ease; /* Adds a smooth color transition on hover */
@@ -109,6 +113,9 @@ a:hover i {
   color: #8ffcff; /* Hover color for the icons */
 }
 
+a:hover {
+  color: #8ffcff; /* Hover color for the icons */
+}
 
 /* Dropdown menu background and text color */
 .navbar .dropdown-menu {
@@ -132,4 +139,5 @@ a:hover i {
   color: $color2; /* White text for active/focused links */
   background-color: transparent; /* Optional: no background color on active */
 }
+
 

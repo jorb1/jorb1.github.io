@@ -74,7 +74,7 @@ library(kableExtra)
 #| eval: true
 #| echo: false
 # Read in data
-corals <- read_csv(here("data", "deep_sea_corals_1843_c601_9be4.csv"))
+corals <- read_csv(here("posts", "2024-12-12-coral-interactions", "data", "deep_sea_corals_1843_c601_9be4.csv"))
 ```
 
 The deep sea corals dataset I chose also includes deep sea sponges. Since this analysis wants to focus on corals, I'll have to filter that data out. In addition, there are several columns on the dataframe that I know won't be helpful for my analysis (for example, collector data, institution data, or columns that contains a lot of NAs.) In addition to filtering out the sponge data, I will filter out those unwanted columns as well. 
