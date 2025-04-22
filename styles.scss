@@ -24,6 +24,7 @@ $body-bg: $color1;
 $body-color: $color1;
 $footer-bg: $color5;
 $footer-fg: $color4;
+$code-block-bg: $color2;
 
 /*-- scss:rules --*/
 
@@ -92,9 +93,6 @@ body {
   background-color: $color1; /* Ensure the background remains dark */
 }
 
-main {
-  margin-top: 150px; /* Adds space below the navbar */
-}
 
 .posts {
   padding-top: 100px; /* Adds space before the post listing */
@@ -133,11 +131,13 @@ a:hover {
   color: #8ffcff; /* Optional: lighter shade on hover */
 }
 
-/* Ensure active or focused menu items are styled */
+/* Active or focused menu items styled */
 .navbar .dropdown-menu a:focus,
 .navbar .dropdown-menu a:active {
   color: $color2; /* White text for active/focused links */
   background-color: transparent; /* Optional: no background color on active */
 }
 
-
+pre code {
+  color: #00f9ff;
+}

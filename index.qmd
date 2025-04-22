@@ -5,19 +5,9 @@ listing:
   type: grid
   sort: "date desc"
   categories: false
-#image: images/boats.jpg
-# about: 
-#   template: marquee
-#   #image-width: 15em
-#   links: 
-#     - text: LinkedIn
-#       icon: linkedin
-#       href: www.linkedin.com/in/bailey-jorgensen-a0a467271
-#       target: _blank
-#     - text: GitHub
-#       href: https://github.com/jorb1
-#       target: _blank
-#     - text: Email
-#       href: mailto:bjorgensen@ucsb.edu
+  
+format: 
+  html:
+    css: index.css
 ---
 
