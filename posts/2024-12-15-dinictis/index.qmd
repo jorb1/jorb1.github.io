@@ -1,0 +1,20 @@
+---
+title: "A Vertebral Column of a False Sabertooth-ed Cat (*Dinictis*) from the Oligocene of South Dakota, USA"
+description: "A Poster Presented at the Geological Society of America Conference in 2024"
+author: "Saira Bhagat, Bailey Jørgensen, and Mairin Balisi"
+date: 2024-12-20
+categories: [Paleontology]
+image: verts.png
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+citation:
+  url: https://jorb1.github.io/posts/2024-12-15-dinictis/
+---
+

@@ -1,0 +1,19 @@
+---
+title: "Post-Cranial Remains from a Subhyracodon Bonebed from the Brule Formation of Niobara County, Wyoming"
+description: "A Poster Presented at the 2024 North American Paleontological Convention"
+author: "Sydney Becker, Nathan Michaelson, Bailey Jørgensen, and Mairin Balisi"
+date: 2024-12-5
+categories: [Paleontology]
+image: subhyra.png
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+citation:
+  url: https://jorb1.github.io/posts/2024-12-5-subhyracodon/
+---
