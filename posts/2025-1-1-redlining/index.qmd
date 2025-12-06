@@ -1,6 +1,6 @@
 ---
 title: "A geospatial look at the relationship between redlining and citizen science"
-description: "Using HOLC grade and GBIF data from Los Angeles"
+description: "An R Analysis Using HOLC grade and GBIF data from Los Angeles"
 author: "Bailey Jørgensen"
 date: 2025-1-1
 categories: [EDS, Geospatial]
