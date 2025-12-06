@@ -1,0 +1,15 @@
+{
+  "hash": "e7cbf39a8d3dbde56e1efdcb275aa8ae",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"A Vertebral Column of a False Sabertooth-ed Cat (*Dinictis*) from the Oligocene of South Dakota, USA\"\ndescription: \"A Poster Presented at the Geological Society of America Conference in 2024\"\nauthor: \"Saira Bhagat, Bailey Jørgensen, and Mairin Balisi\"\ndate: 2024-12-20\ncategories: [Paleontology]\nimage: verts.png\nexecute:\n  warning: false\n  message: false\nformat:\n  html:\n    code-fold: true\n    toc: true\neditor_options: \n  chunk_output_type: console\ncitation:\n  url: https://jorb1.github.io/posts/2024-12-15-dinictis/\n---\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](dinictis-poster.jpg){fig-align='center' width=100%}\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
