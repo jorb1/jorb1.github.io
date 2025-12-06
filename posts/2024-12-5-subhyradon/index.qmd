@@ -17,3 +17,8 @@ editor_options:
 citation:
   url: https://jorb1.github.io/posts/2024-12-5-subhyracodon/
 ---
+
+```{r, fig.align='center', out.width="100%"}
+#| echo: false
+knitr::include_graphics(here::here("posts","2024-12-5-subhyradon","sub-compressed.jpg"))
+```
