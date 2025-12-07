@@ -3,7 +3,7 @@ title: "An R Analysis of Landcover Classification using Decision Trees"
 description: "Using multi-spectral imagery on the location of 4 land cover types, with a machine learning twist"
 author: "Bailey Jørgensen"
 date: 2024-11-8
-categories: [EDS, Geospatial, Machine Learning]
+categories: [R, Geospatial, Machine Learning]
 image: tree.jpg
 execute:
   warning: false

@@ -3,7 +3,7 @@ title: "A Vertebral Column of a False Sabertooth-ed Cat (*Dinictis*) from the Ol
 description: "A Poster Presented at the Geological Society of America Conference in 2024"
 author: "Saira Bhagat, Bailey Jørgensen, and Mairin Balisi"
 date: 2024-12-20
-categories: [Paleontology]
+categories: [Paleontology, Statistics]
 image: verts.png
 execute:
   warning: false

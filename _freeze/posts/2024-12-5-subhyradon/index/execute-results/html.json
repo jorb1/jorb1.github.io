@@ -1,9 +1,11 @@
 {
-  "hash": "25e77c377c1ada7dcef564400e0f39ef",
+  "hash": "8a9b6de8a837db83740c2dc4178b7735",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Post-Cranial Remains from a Subhyracodon Bonebed from the Brule Formation of Niobara County, Wyoming\"\ndescription: \"A Poster Presented at the 2024 North American Paleontological Convention\"\nauthor: \"Sydney Becker, Nathan Michaelson, Bailey Jørgensen, and Mairin Balisi\"\ndate: 2024-12-5\ncategories: [Paleontology]\nimage: subhyra.png\nexecute:\n  warning: false\n  message: false\nformat:\n  html:\n    code-fold: true\n    toc: true\neditor_options: \n  chunk_output_type: console\ncitation:\n  url: https://jorb1.github.io/posts/2024-12-5-subhyracodon/\n---\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](sub-compressed.jpg){fig-align='center' width=100%}\n:::\n:::\n",
-    "supporting": [],
+    "markdown": "---\ntitle: \"Post-Cranial Remains from a Subhyracodon Bonebed from the Brule Formation of Niobara County, Wyoming\"\ndescription: \"A Poster Presented at the 2024 North American Paleontological Convention\"\nauthor: \"Sydney Becker, Nathan Michaelson, Bailey Jørgensen, and Mairin Balisi\"\ndate: 2024-12-5\ncategories: [Paleontology, Statistics]\nimage: subhyra.png\nexecute:\n  warning: false\n  message: false\nformat:\n  html:\n    code-fold: true\n    toc: true\neditor_options: \n  chunk_output_type: console\ncitation:\n  url: https://jorb1.github.io/posts/2024-12-5-subhyracodon/\n---\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](sub-compressed.jpg){fig-align='center' width=100%}\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

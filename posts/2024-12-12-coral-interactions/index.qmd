@@ -3,7 +3,7 @@ title: "Experimenting with a DEEP SEA CORAL interactions model"
 description: "Analyzing the relationship between deep sea corals, latitude, and ocean depth"
 author: "BAILEY JØRGENSEN"
 date: 2024-12-12
-categories: [EDS, Statistics]
+categories: [R, Statistics]
 execute:
   warning: false
   message: false

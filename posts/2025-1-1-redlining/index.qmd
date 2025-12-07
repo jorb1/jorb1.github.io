@@ -3,7 +3,7 @@ title: "A geospatial look at the relationship between redlining and citizen scie
 description: "An R Analysis Using HOLC grade and GBIF data from Los Angeles"
 author: "Bailey Jørgensen"
 date: 2025-1-1
-categories: [EDS, Geospatial]
+categories: [R, Geospatial]
 image: section.png
 execute:
   warning: false

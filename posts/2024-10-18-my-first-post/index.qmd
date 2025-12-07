@@ -5,7 +5,7 @@ author:
   - name: Donald Lofgren, Debra Hanneman, Anthony Runkel, Ping Fong, Gabriel Hong, Josephine Burdekin, Michael Chai, Yvonne Kan, and Bailey Jørgensen
     url: https://orcid.org/my-orcid?orcid=0009-0009-0970-5318
 date: 2024-09-05
-categories: [Paleontology]
+categories: [Paleontology, Statistics]
 toc: true
 image: liz.png
 citation:

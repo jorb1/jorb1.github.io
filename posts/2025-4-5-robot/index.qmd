@@ -5,7 +5,7 @@ author:
   - name: Bailey Jørgensen
     url: https://orcid.org/my-orcid?orcid=0009-0009-0970-5318
 date: 2025-04-05
-categories: [Robots, Paleontology]
+categories: [Robotics, Paleontology, Program Design]
 toc: true
 bibliography: references.bib
 image: rover2.jpg
