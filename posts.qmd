@@ -4,6 +4,10 @@ listing:
   contents: posts
   type: grid
   sort: "date desc"
-  categories: false
+  categories: true
+
+format: 
+  html:
+    css: styles.scss
 
 ---

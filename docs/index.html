@@ -81,9 +81,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -131,7 +131,8 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.scss">
 </head>
 
 <body class="nav-fixed">
@@ -191,9 +192,10 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="EDS">EDS <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Geospatial">Geospatial <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Machine Learning">Machine Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Marine">Marine <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Paleontology">Paleontology <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Robots">Robots <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Statistics">Statistics <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 
 
@@ -214,6 +216,14 @@ window.Quarto = {
 <h5 class="no-anchor card-title listing-title">
 Underwater Paleontology, Robotics, and Education
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Robots'); return false;">
+Robots
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Paleontology'); return false;">
+Paleontology
+</div>
+</div>
 <div class="card-text listing-description">
 A reflection on the early days of a novel data collection technique
 </div>
@@ -239,6 +249,14 @@ Apr 5, 2025
 <h5 class="no-anchor card-title listing-title">
 A geospatial look at the relationship between redlining and citizen science
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('EDS'); return false;">
+EDS
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Geospatial'); return false;">
+Geospatial
+</div>
+</div>
 <div class="card-text listing-description">
 An R Analysis Using HOLC grade and GBIF data from Los Angeles
 </div>
@@ -264,6 +282,11 @@ Jan 1, 2025
 <h5 class="no-anchor card-title listing-title">
 A Vertebral Column of a False Sabertooth-ed Cat (<em>Dinictis</em>) from the Oligocene of South Dakota, USA
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Paleontology'); return false;">
+Paleontology
+</div>
+</div>
 <div class="card-text listing-description">
 A Poster Presented at the Geological Society of America Conference in 2024
 </div>
@@ -289,6 +312,17 @@ Dec 20, 2024
 <h5 class="no-anchor card-title listing-title">
 Prioritizing Potential Aquaculture Zones on the West Coast of the United States
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('EDS'); return false;">
+EDS
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Geospatial'); return false;">
+Geospatial
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Marine'); return false;">
+Marine
+</div>
+</div>
 <div class="card-text listing-description">
 An Exercise in R and Quarto
 </div>
@@ -314,6 +348,14 @@ Dec 20, 2024
 <h5 class="no-anchor card-title listing-title">
 Experimenting with a DEEP SEA CORAL interactions model
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('EDS'); return false;">
+EDS
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Statistics'); return false;">
+Statistics
+</div>
+</div>
 <div class="card-text listing-description">
 Analyzing the relationship between deep sea corals, latitude, and ocean depth
 </div>
@@ -339,6 +381,11 @@ Dec 12, 2024
 <h5 class="no-anchor card-title listing-title">
 Post-Cranial Remains from a Subhyracodon Bonebed from the Brule Formation of Niobara County, Wyoming
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Paleontology'); return false;">
+Paleontology
+</div>
+</div>
 <div class="card-text listing-description">
 A Poster Presented at the 2024 North American Paleontological Convention
 </div>
@@ -364,6 +411,17 @@ Dec 5, 2024
 <h5 class="no-anchor card-title listing-title">
 An R Analysis of Landcover Classification using Decision Trees
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('EDS'); return false;">
+EDS
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Geospatial'); return false;">
+Geospatial
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Machine Learning'); return false;">
+Machine Learning
+</div>
+</div>
 <div class="card-text listing-description">
 Using multi-spectral imagery on the location of 4 land cover types, with a machine learning twist
 </div>
@@ -389,6 +447,14 @@ Nov 8, 2024
 <h5 class="no-anchor card-title listing-title">
 Thomas Fire Analysis
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('EDS'); return false;">
+EDS
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Geospatial'); return false;">
+Geospatial
+</div>
+</div>
 <div class="card-text listing-description">
 A Python AQI and spatial analysis of the 2017 natural disaster from the perspective of a Masters of Environmental Data Science student
 </div>
@@ -414,6 +480,14 @@ Oct 18, 2024
 <h5 class="no-anchor card-title listing-title">
 Biodiversity Intactness Index (BII) change in Phoenix, AZ
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('EDS'); return false;">
+EDS
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Geospatial'); return false;">
+Geospatial
+</div>
+</div>
 <div class="card-text listing-description">
 A geospatial analysis in Python
 </div>
@@ -439,6 +513,11 @@ Sep 29, 2024
 <h5 class="no-anchor card-title listing-title">
 New Records of Eocene and Oligocene Squamates from Southwest Montana
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Paleontology'); return false;">
+Paleontology
+</div>
+</div>
 <div class="card-text listing-description">
 A new paper published in Paludicola by the Rochester Institute of Vertebrate Paleontology
 </div>

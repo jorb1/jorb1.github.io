@@ -39,6 +39,7 @@ website:
 format:
   html:
     theme: styles.scss
+    css: styles.css
     mainfont: Roboto
     fontcolor: "#FFFFFF"
     toc: false
