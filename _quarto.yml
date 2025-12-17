@@ -16,7 +16,7 @@ website:
         text: About
      # - href: resources.qmd
      #   text: Resources
-      - href: cv.qmd
+      - href: resume-website.pdf
         text: Resume
      # - href: contact.qmd
       - text: Contact
