@@ -5,10 +5,10 @@ format: html
 
 
 <embed 
-  src="resume-website.pdf"
+  src="jorgensen-resume-website.pdf"
   type="application/pdf"
   width="100%"
   height="900px"
 />
 
-[⬇ Download my CV (PDF)](resume-website.pdf){.btn .btn-primary}
+
