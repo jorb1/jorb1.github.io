@@ -25,7 +25,7 @@ knitr::include_graphics(here::here("posts","2023-1-1-cert","biocol-cert.jpg"))
 
 ## Course Description: 
 
-From the iDigBio website: 
+From the [iDigBio](https://www.idigbio.org/) website: 
 
 "The goal of the course is for the students to produce a short (5–10 pages) strategic plan for their collection. Each plan will address vision, mission, values, stakeholders, strategies, goals, objectives, evaluation, and sustainability, among other things.
 

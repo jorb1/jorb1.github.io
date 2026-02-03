@@ -14,17 +14,6 @@ citation:
 
 ---
 ## Published in [Paludicola 14(3):110-121](https://rivp-paludicola.org/home-page/)
-### Abstract:
 
-Recently recovered specimens from the Chadronian Pipestone Springs Main Pocket (PSMP), Whitneyan strata in the Gravelly Range, and Uintan rocks in the Sage Creek area significantly increase the diversity of squamates known from the Tertiary depositional basins of southwest Montana. At PSMP, most common are the glyptosaurine lizard Helodermoides tuberculatus which represents over 60% of dentigerous lizard elements and the boid snake Calamagras which is represented by forty-four vertebrae. Four varanid elements, a specimen tentatively referred to the glyptosaurine Peltosaurus, and Calamagras from PSMP are their first documented occurrences in the Tertiary depositional basins of southwest Montana, as is a miniscule dentary fragment that represents an iguanid smaller than Aciprion formosum. A skull of A. formosum from the Gravelly Range is the first record of the species from Montana and its first confirmed occurrence from Whitneyan strata. Fragmentary elements from the Uintan Dell beds in the Sage Creek depositional basin indicate the presence of a glyptosaurine and an indeterminate iguanid. These new records of Eocene and Oligocene squamates from Montana are important additions to the temporal and/or paleogeographic ranges of Calamagras, Aciprion formosum, varanids, and perhaps Peltosaurus.
-
-### Sneak peak of a figure inside:
-
-```{r, fig.align='center'}
-#| echo: false
-knitr::include_graphics(here::here("posts","2024-10-18-my-first-post","liz.png"))
-```
-
-Smash that contact button if you want to learn more!
-
+<iframe src="squamates.pdf" width="100%" height="800px"></iframe>
 
