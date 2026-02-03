@@ -1,0 +1,24 @@
+---
+title: "Strategic Planning for Biodiversity Collections"
+description: "Certificate of Training from Integrated Digitized Biocollections (iDigBio)"
+author: "Bailey Jørgensen"
+date: 2023-1-1
+categories: [Collections, Leadership]
+image: biocol-cert.jpg
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+citation:
+  url: https://jorb1.github.io/posts/2023-1-1-cert/
+---
+
+```{r, fig.align='center', out.width="100%"}
+#| echo: false
+knitr::include_graphics(here::here("posts","2023-1-1-cert","biocol-cert.jpg"))
+```

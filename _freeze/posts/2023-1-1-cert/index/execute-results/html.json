@@ -1,0 +1,15 @@
+{
+  "hash": "ed0fad68ad8f6f587aaf6634375472b8",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Strategic Planning for Biodiversity Collections\"\ndescription: \"Certificate of Training from Integrated Digitized Biocollections (iDigBio)\"\nauthor: \"Bailey Jørgensen\"\ndate: 2023-1-1\ncategories: [Collections, Leadership]\nimage: biocol-cert.jpg\nexecute:\n  warning: false\n  message: false\nformat:\n  html:\n    code-fold: true\n    toc: true\neditor_options: \n  chunk_output_type: console\ncitation:\n  url: https://jorb1.github.io/posts/2023-1-1-cert/\n---\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](biocol-cert.jpg){fig-align='center' width=100%}\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
