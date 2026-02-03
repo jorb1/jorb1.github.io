@@ -22,3 +22,23 @@ citation:
 #| echo: false
 knitr::include_graphics(here::here("posts","2023-1-1-cert","biocol-cert.jpg"))
 ```
+
+## Course Description: 
+
+From the iDigBio website: 
+
+"The goal of the course is for the students to produce a short (5–10 pages) strategic plan for their collection. Each plan will address vision, mission, values, stakeholders, strategies, goals, objectives, evaluation, and sustainability, among other things.
+
+- Lesson 1 focuses on Stakeholders, Mission, Vision, and Core Values in addition to introducing participants to the course;
+- Lesson 2 focuses on Strategies, Goals, Objectives, and Value Proposition; 
+- Lesson 3 focuses on Environmental Scan (SWOT/TOWS analysis);
+- Lesson 4 focuses on Sustainability (addressing the SWOT/TOWS analysis);
+- Lesson 5 focuses on Evaluation, including Logic Models, Metrics, Benchmarks, and Milestones;
+- Lesson 6 focuses on bringing everything together into a cohesive Strategic Plan, developing an Executive Summary, and adding Acknowledgements;
+- Lesson 7 focuses on elements of design and formatting, developing a one-page strategic plan, and developing an elevator pitch; and
+- Lesson 8 focuses on peer feedback and how to continually improve, communicate, and implement the Strategic Plan."
+
+## Insights from the Course
+
+
+

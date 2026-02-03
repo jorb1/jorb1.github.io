@@ -45,4 +45,7 @@ format:
     toc: false
     page-layout: full
 
+resources:
+  - "**/*.pdf"
+
 

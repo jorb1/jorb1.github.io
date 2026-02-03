@@ -1,0 +1,25 @@
+---
+title: "Bridgerian and Uintan (Eocene) Mammals from Sage Creek Area of Southwest Montana"
+description: "A new paper published in Paludicola by the Rochester Institute of Vertebrate Paleontology"
+author: "Donald Lofgren, Debra Hanneman, Bailey Jorgensen, Shuwen Zhang, Laura Li, Xander Kong, Jonathan Yu, Frank Hu, Aspen Helgeson, Yvonne Kan, Jonathan Becker, Emily Li, Sihan Li, Nick Lee, Anthony Runkel."
+date: 2025-6-1
+categories: [Paleontology, Collections, Statistics]
+image: sc-fig.jpg
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+citation:
+  url: https://jorb1.github.io/posts/2025-6-1-sagecreek/
+---
+
+
+<iframe src="sage-creek-2025.pdf" width="100%" height="800px"></iframe>
+
+
+
