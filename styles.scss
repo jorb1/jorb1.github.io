@@ -99,7 +99,7 @@ body {
 }
 
 a {
-  color: #00f9ff; /* Replace with your desired default color */
+  color: #00f9ff;
 }
 
 a i {
@@ -199,4 +199,9 @@ h1#page-title {
   width: 100% !important;
 }
 
+
+
+.quarto-grid-item:hover .card-title {
+  color: #8ffcff !important;
+}
 
