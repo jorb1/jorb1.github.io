@@ -222,3 +222,25 @@ code:not(pre code) {
 }
 
 
+/* Force inline code styling for dark backgrounds */
+p code:not(.sourceCode),
+li code:not(.sourceCode),
+td code:not(.sourceCode),
+dd code:not(.sourceCode) {
+  background-color: #111 !important;
+  color: #8ffcff;
+  padding: 0.2em 0.35em;
+  border-radius: 4px;
+}
+
+
+/* Code block background (R + Python chunks) */
+pre,
+pre code,
+div.sourceCode {
+  background-color: #1c1c1c !important;  // dark gray
+  color: #eaeaea;
+  border-radius: 8px;
+}
+
+
