@@ -1,6 +1,6 @@
 ---
 title: "Ontogenetic Braincase Variation in *Parasaurolophus* from the Kaiparowits Formation"
-description: "A Poster Presented at the 2026 Western Association of Vertebrate Paleontology"
+description: "A Poster Presented at the 2026 Western Association of Vertebrate Paleontology Conference"
 author: "Billie Guerrero, Bailey Jørgensen"
 date: 2026-2-12
 categories: [Paleontology, Data Visualization]
