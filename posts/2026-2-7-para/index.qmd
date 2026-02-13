@@ -1,0 +1,24 @@
+---
+title: "Ontogenetic Braincase Variation in *Parasaurolophus* from the Kaiparowits Formation"
+description: "A Poster Presented at the 2026 Western Association of Vertebrate Paleontology"
+author: "Billie Guerrero, Bailey Jørgensen"
+date: 2026-2-12
+categories: [Paleontology, Data Visualization]
+image: Parasaurolophus.jpg
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+citation:
+  url: https://jorb1.github.io/posts/2026-2-7-para/
+---
+
+```{r, fig.align='center', out.width="100%"}
+#| echo: false
+knitr::include_graphics(here::here("posts","2026-2-7-para","bb-poster-2026.png"))
+```

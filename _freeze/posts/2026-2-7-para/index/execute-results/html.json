@@ -1,0 +1,15 @@
+{
+  "hash": "85df4302facdebff6fdec437b77c7193",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Ontogenetic Braincase Variation in *Parasaurolophus* from the Kaiparowits Formation\"\ndescription: \"A Poster Presented at the 2026 Western Association of Vertebrate Paleontology\"\nauthor: \"Billie Guerrero, Bailey Jørgensen\"\ndate: 2026-2-12\ncategories: [Paleontology, Data Visualization]\nimage: Parasaurolophus.jpg\nexecute:\n  warning: false\n  message: false\nformat:\n  html:\n    code-fold: true\n    toc: true\neditor_options: \n  chunk_output_type: console\ncitation:\n  url: https://jorb1.github.io/posts/2026-2-7-para/\n---\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](bb-poster-2026.png){fig-align='center' width=100%}\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
