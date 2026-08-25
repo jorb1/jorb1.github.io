@@ -1,0 +1,24 @@
+---
+title: "New Records of Eocene-Oligocene Mammals from the Gravelly Range, Southwest Montana"
+description: "My third co-authorship: a paleontological description of ancient animals in one of my favorite mountain ranges in my home state"
+author: 
+  - name: Donald Lofgren, Debra Hanneman, Bailey Jorgensen, et al.
+
+date: 2026-8-1
+categories: [Paleontology, Collections, Statistics]
+image: fig4.png
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+citation:
+  url: https://jorb1.github.io/posts/2026-8-1-montana/
+---
+
+
+<iframe src="pub3.pdf" width="100%" height="800px"></iframe>
