@@ -1,6 +1,6 @@
 ---
 title: "Bridgerian and Uintan (Eocene) Mammals from Sage Creek Area of Southwest Montana"
-description: "A new paper published in Paludicola by the Rochester Institute of Vertebrate Paleontology"
+description: "My second co-authorship: A new paper published in Paludicola by the Rochester Institute of Vertebrate Paleontology"
 author: 
   - name: Donald Lofgren, Debra Hanneman, Bailey Jorgensen, et al.
 
