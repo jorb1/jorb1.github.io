@@ -1,6 +1,6 @@
 ---
 title: "New Records of Eocene and Oligocene Squamates from Southwest Montana"
-description: "A new paper published in Paludicola by the Rochester Institute of Vertebrate Paleontology"
+description: "My first co-authorship: A paper published in Paludicola by the Rochester Institute of Vertebrate Paleontology"
 author: 
   - name: Donald Lofgren, Debra Hanneman, Anthony Runkel, Ping Fong, Gabriel Hong, Josephine Burdekin, Michael Chai, Yvonne Kan, and Bailey Jørgensen
     url: https://orcid.org/my-orcid?orcid=0009-0009-0970-5318

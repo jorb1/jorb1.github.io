@@ -3,7 +3,6 @@ title: "New Records of Eocene-Oligocene Mammals from the Gravelly Range, Southwe
 description: "My third co-authorship: a paleontological description of ancient animals in one of my favorite mountain ranges in my home state"
 author: 
   - name: Donald Lofgren, Debra Hanneman, Bailey Jorgensen, et al.
-
 date: 2026-8-1
 categories: [Paleontology, Collections, Statistics]
 image: fig4.png
